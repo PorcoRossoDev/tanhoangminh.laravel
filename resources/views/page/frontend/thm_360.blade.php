@@ -312,250 +312,103 @@
     @endif
 
     {{-- Block 4 --}}
-    <section class="mt-[85px]">
-        <div class="container">
-            <div class="flex justify-between items-center mb-[45px] wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                <h3 class="font-bold text-[40px]">THM Leauge</h3>
-            </div>
-            <div class="grid grid-cols-12 gap-[10px]">
-                <div class="col-span-6 relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                    <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                        <img src="/upload/images/logo/bds-1.jpg" class="h-[360px] w-full object-cover object-bottom" alt="">
+    @if($th_edu && $th_edu->isNotEmpty())
+        @foreach($th_edu as $cat)
+            <section class="mt-[85px]">
+                <div class="container">
+                    <div class="flex justify-between items-center mb-[45px] wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                        <h3 class="font-bold text-[40px]">{{ $cat->title }}</h3>
                     </div>
-                    <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                        <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="">Bất động sản</a></li>
-                    </ul>
-                    <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
-                        <div class="text-f16 mb-2">March 20, 2025</div>
-                        <h4 class="text-f24 font-semibold" style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            display: -webkit-box;
-                        ">
-                            Tips for First-Time Homebuyers: 
-                            A Comprehensive Guide
-                        </h4>
+                    <div class="grid grid-cols-12 gap-[10px]">
+                        @foreach( $cat->posts as $k => $post )
+                            <div class="@if( $k==0 ) 2xl:col-span-6 @elseif($k>0 && $k<3) 2xl:col-span-3 @else 2xl:col-span-4  @endif lg:col-span-4 sm:col-span-6 col-span-12 relative rounded-[30px] overflow-hidden">
+                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
+                                    <img src="{{asset($post->image)}}" class="@if( $k<3 ) h-[360px]  @else h-[255px]  @endif w-full object-cover object-bottom" alt="">
+                                </div>
+                                <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
+                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a></li>
+                                </ul>
+                                <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
+                                    <div class="text-f16 mb-2">{{ $post->created_at->format('M d, Y') }}</div>
+                                    <h4 class="text-f24 font-semibold" style="
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 2;
+                                        display: -webkit-box;
+                                    ">
+                                        {{$post->title}}
+                                    </h4>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                <div class="col-span-3 relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                    <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                        <img src="/upload/images/logo/bds-2.jpg" class="h-[360px] w-full object-cover object-bottom" alt="">
-                    </div>
-                    <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                        <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="">Bất động sản</a></li>
-                    </ul>
-                    <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
-                        <div class="text-f16 mb-2">March 20, 2025</div>
-                        <h4 class="text-f24 font-semibold" style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            display: -webkit-box;
-                        ">
-                            Tips for First-Time Homebuyers: 
-                            A Comprehensive Guide
-                        </h4>
+                    <div class="text-center mt-[30px] wow fadeInUp" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
+                        <a href="" class="inline-block mt-[45px] hover:bg-color_primary hover:text-white duration-300 font-bold border-color_primary border-[3px] text-color_primary text-f25 px-[40px] py-[20px] rounded-[60px]">Xem thêm</a>
                     </div>
                 </div>
-                <div class="col-span-3 relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                    <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                        <img src="/upload/images/logo/bds-3.jpg" class="h-[360px] w-full object-cover object-bottom" alt="">
-                    </div>
-                    <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                        <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="">Bất động sản</a></li>
-                    </ul>
-                    <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
-                        <div class="text-f16 mb-2">March 20, 2025</div>
-                        <h4 class="text-f24 font-semibold" style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            display: -webkit-box;
-                        ">
-                            Tips for First-Time Homebuyers: 
-                            A Comprehensive Guide
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-span-4 relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-                    <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                        <img src="/upload/images/logo/bds-4.jpg" class="h-[255px] w-full object-cover object-bottom" alt="">
-                    </div>
-                    <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                        <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="">Bất động sản</a></li>
-                    </ul>
-                    <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
-                        <div class="text-f16 mb-2">March 20, 2025</div>
-                        <h4 class="text-f24 font-semibold" style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            display: -webkit-box;
-                        ">
-                            Tips for First-Time Homebuyers: 
-                            A Comprehensive Guide
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-span-4 relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
-                    <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                        <img src="/upload/images/logo/bds-5.jpg" class="h-[255px] w-full object-cover object-bottom" alt="">
-                    </div>
-                    <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                        <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="">Bất động sản</a></li>
-                    </ul>
-                    <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
-                        <div class="text-f16 mb-2">March 20, 2025</div>
-                        <h4 class="text-f24 font-semibold" style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            display: -webkit-box;
-                        ">
-                            Tips for First-Time Homebuyers: 
-                            A Comprehensive Guide
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-span-4 relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-                    <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                        <img src="/upload/images/logo/bds-6.jpg" class="h-[255px] w-full object-cover object-bottom" alt="">
-                    </div>
-                    <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                        <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="">Bất động sản</a></li>
-                    </ul>
-                    <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
-                        <div class="text-f16 mb-2">March 20, 2025</div>
-                        <h4 class="text-f24 font-semibold" style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            display: -webkit-box;
-                        ">
-                            Tips for First-Time Homebuyers: 
-                            A Comprehensive Guide
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-[30px] wow fadeInUp" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
-                <a href="" class="inline-block mt-[45px] hover:bg-color_primary hover:text-white duration-300 font-bold border-color_primary border-[3px] text-color_primary text-f25 px-[40px] py-[20px] rounded-[60px]">Xem thêm</a>
-            </div>
-        </div>
-    </section>
+            </section>
+        @endforeach
+    @endif
 
-    <section class="mt-[85px]">
-        <div class="container">
-            <h3 class="font-bold text-[40px]">THM Sport</h3>
-            <div class="flex mt-[40px] gap-[30px]">
-                <div class="w-[590px] h-[630px] overflow-y-scroll scroll-bds">
-                    <div class="flex gap-[30px] h-[200px] mb-[33px]">
-                        <div class="w-[245px]">
-                            <img src="/upload/images/logo/sport-1.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
+    @if($th_sport && $th_sport->isNotEmpty())
+        @foreach($th_sport as $cat)
+            <section class="mt-[85px]">
+                <div class="container">
+                    <h3 class="font-bold text-[40px]">{{ $cat->title }}</h3>
+                    <div class="flex mt-[40px] gap-[30px]">
+                        <div class="w-[590px] h-[630px] overflow-y-scroll scroll-bds">
+                            @foreach( $cat->posts as $k => $post )
+                            <div class="flex gap-[30px] h-[200px] mb-[33px]">
+                                <div class="w-[245px]">
+                                    <img src="{{asset($post->image)}}" class="w-full h-full object-cover rounded-[20px]" alt="">
+                                </div>
+                                <div class="flex-1">
+                                    <div>
+                                        <span class="text-color_primary">{{ $post->created_at->format('M d, Y') }}</span>
+                                        <span class="ml-[15px]"><a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a></span>
+                                    </div>
+                                    <div class="mt-[22px]">
+                                        <h3 class="font-bold text-f22"><a href="{{route('routerURL', ['slug' => $post->slug])}}">{{$post->title}}</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                         <div class="flex-1">
-                            <div>
-                                <span class="text-color_primary">March 19, 2023</span>
-                                <span class="ml-[15px]">THM 360</span>
-                            </div>
-                            <div class="mt-[22px]">
-                                <h3 class="font-bold text-f22">The Rise of NFTs: Why Digital Art is Selling for Millions</h3>
-                            </div>
+                            @foreach( $cat->posts as $k => $post )
+                                @if($k == 0)
+                                    <div class="relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                        <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
+                                            <img src="{{asset($post->image)}}" class="h-[630px] w-full object-cover object-bottom" alt="">
+                                        </div>
+                                        <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
+                                            <div class="inline-block border border-white text-f16 rounded-[100px] text-white py-[4px] px-[12px]">
+                                                <a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a>
+                                            </div>
+                                            <div class="text-f16 mb-2 mt-[20px]">{{ $post->created_at->format('M d, Y') }}</div>
+                                            <h4 class="text-f24 font-semibold" style="
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                -webkit-box-orient: vertical;
+                                                -webkit-line-clamp: 2;
+                                                display: -webkit-box;
+                                            ">
+                                                <a href="{{route('routerURL', ['slug' => $post->slug])}}">{{$post->title}}</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
-                    <div class="flex gap-[30px] h-[200px] mb-[33px]">
-                        <div class="w-[245px]">
-                            <img src="/upload/images/logo/sport-1.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                        </div>
-                        <div class="flex-1">
-                            <div>
-                                <span class="text-color_primary">March 19, 2023</span>
-                                <span class="ml-[15px]">THM 360</span>
-                            </div>
-                            <div class="mt-[22px]">
-                                <h3 class="font-bold text-f22">The Rise of NFTs: Why Digital Art is Selling for Millions</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-[30px] h-[200px] mb-[33px]">
-                        <div class="w-[245px]">
-                            <img src="/upload/images/logo/sport-1.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                        </div>
-                        <div class="flex-1">
-                            <div>
-                                <span class="text-color_primary">March 19, 2023</span>
-                                <span class="ml-[15px]">THM 360</span>
-                            </div>
-                            <div class="mt-[22px]">
-                                <h3 class="font-bold text-f22">The Rise of NFTs: Why Digital Art is Selling for Millions</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-[30px] h-[200px] mb-[33px]">
-                        <div class="w-[245px]">
-                            <img src="/upload/images/logo/sport-1.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                        </div>
-                        <div class="flex-1">
-                            <div>
-                                <span class="text-color_primary">March 19, 2023</span>
-                                <span class="ml-[15px]">THM 360</span>
-                            </div>
-                            <div class="mt-[22px]">
-                                <h3 class="font-bold text-f22">The Rise of NFTs: Why Digital Art is Selling for Millions</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-[30px] h-[200px] mb-[33px]">
-                        <div class="w-[245px]">
-                            <img src="/upload/images/logo/sport-1.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                        </div>
-                        <div class="flex-1">
-                            <div>
-                                <span class="text-color_primary">March 19, 2023</span>
-                                <span class="ml-[15px]">THM 360</span>
-                            </div>
-                            <div class="mt-[22px]">
-                                <h3 class="font-bold text-f22">The Rise of NFTs: Why Digital Art is Selling for Millions</h3>
-                            </div>
-                        </div>
+                    <div class="text-center mt-[30px] wow fadeInUp" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
+                        <a href="" class="inline-block mt-[45px] hover:bg-color_primary hover:text-white duration-300 font-bold border-color_primary border-[3px] text-color_primary text-f25 px-[40px] py-[20px] rounded-[60px]">Xem thêm</a>
                     </div>
                 </div>
-                <div class="flex-1">
-                    <div class="relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                            <img src="/upload/images/logo/banner-360.jpg" class="h-[630px] w-full object-cover object-bottom" alt="">
-                        </div>
-                        <div class="absolute bottom-5 z-10 w-full text-white px-[22px]">
-                            <div class="inline-block border border-white text-f16 rounded-[100px] text-white py-[4px] px-[12px]">
-                                THM 360
-                            </div>
-                            <div class="text-f16 mb-2 mt-[20px]">March 20, 2025</div>
-                            <h4 class="text-f24 font-semibold" style="
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                -webkit-box-orient: vertical;
-                                -webkit-line-clamp: 2;
-                                display: -webkit-box;
-                            ">
-                                Tips for First-Time Homebuyers: 
-                                A Comprehensive Guide
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-[30px] wow fadeInUp" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
-                <a href="" class="inline-block mt-[45px] hover:bg-color_primary hover:text-white duration-300 font-bold border-color_primary border-[3px] text-color_primary text-f25 px-[40px] py-[20px] rounded-[60px]">Xem thêm</a>
-            </div>
-        </div>
-    </section>
+            </section>
+        @endforeach
+    @endif
     
 </div>
 

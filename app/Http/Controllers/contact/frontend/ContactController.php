@@ -36,40 +36,50 @@ class ContactController extends Controller
     }
     public function store(Request $request)
     {
-        if (config('app.locale') == 'vi') {
-            $validator = Validator::make($request->all(), [
-                'fullname' => 'required',
-                'email' => 'required|email',
-                'phone' => ['required', new PhoneNumber],
-            ], [
-                'fullname.required' => 'Trường Họ và tên là trường bắt buộc.',
-                'email.required' => 'Email là trường bắt buộc.',
-                'email.email' => 'Email không đúng định dạng.',
-                'phone.required' => 'Số điện thoại là trường bắt buộc.',
-            ]);
-        } else {
-            $validator = Validator::make($request->all(), [
-                'fullname' => 'required',
-                'email' => 'required|email',
-                'phone' => 'required',
-                'message' => 'required',
-            ]);
-        }
+        // dùng Validator để tự trả JSON lỗi
+        $validator = Validator::make($request->all(), [
+            'fullname' => 'required|string|max:255',
+            'email'    => 'required|email',
+            'phone'    => 'required|string|max:20',
+            'phongban' => 'required|string|max:255',
+            'ykien'    => 'required|string|max:255',
+            'message'  => 'required|string',
+            'file'     => 'nullable|file|max:2048', // 2MB
+        ]);
         if ($validator->passes()) {
-            $id = Contact::insertGetId([
+            $filePath = null;
+            if ($request->hasFile('file')) {
+                $file     = $request->file('file');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+
+                // Tạo thư mục nếu chưa có
+                $destinationPath = base_path('upload/files/contact');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0777, true);
+                }
+
+                // Di chuyển file
+                $file->move($destinationPath, $fileName);
+
+                // Lưu đường dẫn vào DB
+                $filePath = 'upload/files/contact/' . $fileName;
+            }
+            $contact = Contact::insertGetId([
                 'fullname' => $request->fullname,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'message' => $request->message,
-                'type' => 'contact',
-                'created_at' => Carbon::now()
+                'email'    => $request->email,
+                'phone'    => $request->phone,
+                'phongban' => $request->phongban,
+                'ykien'    => $request->ykien,
+                'message'  => $request->message,
+                'file'=> $filePath,
             ]);
-            if ($id > 0) {
+            if ($contact > 0) {
                 return response()->json(['status' => '200']);
             } else {
                 return response()->json(['status' => '500']);
             }
         }
+        
         return response()->json(['error' => $validator->errors()->all(), 'status' => '500']);
     }
     

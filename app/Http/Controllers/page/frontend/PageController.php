@@ -280,9 +280,28 @@ class PageController extends Controller
             ->orderBy('order', 'asc')
             ->get();
         }
-        
 
-        
+        $id_leauge = !empty($fcSystem['thm360_3']) ? json_decode($fcSystem['thm360_3'], true) : 0;
+        $th_leauge = null;
+        if( $id_leauge ){
+            $th_leauge = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_leauge)
+            ->with(['posts'])
+            ->orderBy('order', 'asc')
+            ->get();
+        }
+
+        $id_sport = !empty($fcSystem['thm360_4']) ? json_decode($fcSystem['thm360_4'], true) : 0;
+        $th_sport = null;
+        if( $id_sport ){
+            $th_sport = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_sport)
+            ->with(['posts'])
+            ->orderBy('order', 'asc')
+            ->get();
+        }
 
 
         $seo['canonical'] = url('/');
@@ -290,7 +309,7 @@ class PageController extends Controller
         $seo['meta_description'] = !empty($page['meta_description']) ? $page['meta_description'] : '';
         $seo['meta_image'] = !empty($page['image']) ? url($page['image']) : '';
         
-        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_edu'));
+        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_edu', 'th_leauge', 'th_sport'));
     }
     
     public function scheduleSampling(Request $request)
