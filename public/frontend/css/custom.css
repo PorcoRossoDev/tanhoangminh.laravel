@@ -1,0 +1,260 @@
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-Poppins/SVN-Poppins Regular.otf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-Poppins/SVN-Poppins Italic.otf');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-Poppins/SVN-Poppins Medium.otf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-Poppins/SVN-Poppins SemiBold.otf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-Poppins/SVN-Poppins Bold.otf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-Poppins/SVN-Poppins Bold Italic.otf');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SVN-Poppins';
+    src: url('../fonts/SVN-Poppins/SVN-Poppins ExtraBold.otf');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'VL MISSLEGATEES.OTF';
+    src: url('../fonts/VL MISSLEGATEES.OTF');
+    font-style: normal;
+}
+
+body {
+    font-family: 'SVN-Poppins', sans-serif;
+    background-color: #FFFBF2;
+}
+
+.font-misslegate{
+    font-family: 'VL MISSLEGATEES.OTF';
+}
+
+
+
+/*  */
+
+.section-home .swiper-pagination {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.section-home .swiper-pagination span {
+    width: 10px;
+    height: 10px;
+    margin-block: 10px;
+    display: inline-block;
+    position: relative;
+    background: #c38e2b;
+}
+
+span.swiper-pagination-bullet.swiper-pagination-bullet-active:after, span.swiper-pagination-bullet:hover:after {
+    opacity: 1!important;
+    transition: 0.4s;
+    transform: translate(-50%, -50%) scale(1)!important;
+}
+
+.section-home .swiper-pagination span:after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 1px solid #c38e2b;
+    position: absolute;
+    display: inline-block;
+    border-radius: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    top: 50%;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.section-home {
+    position: relative;
+}
+
+.scroll-bds::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+.scroll-bds::-webkit-scrollbar-thumb {
+    background-color: #000;
+    border: 2px solid #000;
+}
+.scroll-bds::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+.hover-img:hover img{
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+.hover-img img{
+    transition: 0.4s;
+}
+
+.hover-img{
+    overflow: hidden;
+}
+
+@media (max-width: 1024px) and (min-width: 768px){
+    .md-hidden-5 > *:nth-child(5){
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 992px){
+    .md-hidden-5 > *:nth-child(5),
+    .md-hidden-5 > *:nth-child(4){
+        display: none;
+    }
+}
+
+@media (max-width: 849px) and (min-width: 640px){
+    .tabBlock-content .grid > div:nth-child(3){
+        display: none;
+    }
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    justify-content: center;
+    margin: 30px 0;
+    gap: 6px;
+}
+
+.page-item {
+    display: inline-block;
+}
+
+.page-link {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: all 0.25s ease-in-out;
+    text-decoration: none;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+}
+
+.page-link:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.page-item.active .page-link {
+    background-color: #c38e2b;
+    border-color: #c38e2b;
+    color: #fff;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.page-item.disabled .page-link {
+    color: #aaa;
+    background-color: #f9f9f9;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+
+.content-content p, .content-content li {
+    margin-bottom: 15px;
+}
+
+.content-content {
+    color: #222222;
+}
+
+@media (max-width: 767px){
+    .content-content img{
+        max-width: 100%;
+        height: auto!important;
+    }
+    .content-content h2 {
+        font-size: 27px;
+        line-height: 35px;
+    }    
+}
+
+.content-content blockquote::before {
+    content: url("data:image/svg+xml;utf8,<svg width='50' height='43' viewBox='0 0 50 43' fill='none' xmlns='http://www.w3.org/2000/svg'><g opacity='0.15' clip-path='url(%23clip0_581_1530)'><path d='M21.7715 18.6362V37.2695H0.333984V18.37C0.333984 5.59286 14.1152 3.99572 14.1152 3.99572L15.9527 7.72239C15.9527 7.72239 9.82773 8.52096 8.60273 12.78C7.37773 15.9743 9.82774 18.6362 9.82774 18.6362H21.7715Z' fill='%23C38E2B'/><path d='M49.334 18.6364V37.2698H27.8965V18.3703C27.8965 5.59311 41.6777 3.99597 41.6777 3.99597L43.5152 7.72263C43.5152 7.72263 37.3902 8.52121 36.1652 12.7803C34.9402 15.9745 37.3902 18.6364 37.3902 18.6364H49.334Z' fill='%23C38E2B'/></g><defs><clipPath id='clip0_581_1530'><rect width='49' height='42.5905' fill='white' transform='matrix(-1 0 0 -1 49.334 42.5935)'/></clipPath></defs></svg>");
+    display: inline-block;
+    width: 50px;   /* tương ứng kích thước SVG */
+    height: 43px;
+    margin-right: 10px;
+    vertical-align: middle;
+    position: absolute;
+    top: -15px;
+    left: -70px;
+}
+
+.content-content blockquote::after {
+    content: url("data:image/svg+xml;utf8,<svg width='50' height='44' viewBox='0 0 50 44' fill='none' xmlns='http://www.w3.org/2000/svg'><g opacity='0.15' clip-path='url(%23clip0_581_1533)'><path d='M28.0625 24.5061V5.8728H49.5V24.7723C49.5 37.5495 35.7188 39.1466 35.7188 39.1466L33.8812 35.4199C33.8812 35.4199 40.0063 34.6214 41.2313 30.3623C42.4563 27.168 40.0062 24.5061 40.0062 24.5061H28.0625Z' fill='%23C38E2B'/><path d='M0.5 24.5061V5.8728H21.9375V24.7723C21.9375 37.5495 8.15625 39.1466 8.15625 39.1466L6.31875 35.4199C6.31875 35.4199 12.4438 34.6214 13.6688 30.3623C14.8938 27.168 12.4438 24.5061 12.4438 24.5061H0.5Z' fill='%23C38E2B'/></g><defs><clipPath id='clip0_581_1533'><rect width='49' height='42.5905' fill='white' transform='translate(0.5 0.549316)'/></clipPath></defs></svg>");
+    display: inline-block;
+    width: 50px;   /* chiều rộng SVG */
+    height: 44px;  /* chiều cao SVG */
+    margin-left: 10px;
+    vertical-align: middle;
+    position: absolute;
+    right: 85px;
+    bottom: 0px;
+}
+
+.content-content blockquote {
+    position: relative;
+    /* padding-inline: 65px; */
+    margin-top: 25px;
+    margin-bottom: 20px;
+    text-indent: 85px;
+}
+
+.content-content h2 {
+    font-size: 30px;
+    line-height: 40px;
+}

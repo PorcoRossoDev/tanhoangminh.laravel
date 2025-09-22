@@ -1,0 +1,20 @@
+# Bỏ theo dõi tất cả
+*
+
+# Mở theo dõi 4 folder cần thiết và tất cả file bên trong
+!app/
+!app/**
+
+!resources/
+!resources/**
+
+!routes/
+!routes/**
+
+!public/
+!public/frontend/
+!public/frontend/css/
+!public/frontend/css/**
+
+# Giữ .gitignore
+!.gitignore

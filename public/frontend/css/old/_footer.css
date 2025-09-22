@@ -1,0 +1,13 @@
+
+
+.logo-footer img{
+    width: 95px;
+}
+@media only screen and (max-width: 1024px){
+    footer{
+        padding: 0;
+        padding-top: 30px;
+        width: 100%;
+        overflow: hidden;;
+    }
+}
