@@ -141,6 +141,18 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active:after, span.swiper
     }
 }
 
+@media (max-width: 991px){
+    .comment-home{
+        width: 95%;
+        overflow: hidden;
+        margin-left: 5%;
+    }
+    .comment-home h4 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
 @media (max-width: 1024px) and (min-width: 992px){
     .md-hidden-5 > *:nth-child(5),
     .md-hidden-5 > *:nth-child(4){
@@ -257,4 +269,64 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active:after, span.swiper
 .content-content h2 {
     font-size: 30px;
     line-height: 40px;
+}
+
+@media (min-width: 1366px) and (max-width: 1560px){
+    .th360-comment > div >div {
+        -webkit-line-clamp: 2!important;
+    }
+}
+
+.toggle-nav {
+    position: unset;
+    width: auto;
+}
+
+.hc-offcanvas-nav .nav-content>.nav-close:first-child a, .hc-offcanvas-nav .nav-title+.nav-close a.has-label, .hc-offcanvas-nav li.nav-close a, .hc-offcanvas-nav .nav-back a {
+    background: #fff;
+    border-top: unset;
+    border-bottom: unset;
+}
+.hc-offcanvas-nav .nav-container, .hc-offcanvas-nav .nav-wrapper, .hc-offcanvas-nav ul {
+    background: #fff;
+}
+.hc-offcanvas-nav .nav-item-link, .hc-offcanvas-nav li.nav-close a, .hc-offcanvas-nav .nav-back a {
+    padding: 14px 17px;
+    font-size: 14px;
+    color: #000;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #ddd;
+    transition: background .1s ease;
+}
+
+.hc-offcanvas-nav .nav-content>.nav-close:first-child a, .hc-offcanvas-nav .nav-title+.nav-close a.has-label, .hc-offcanvas-nav li.nav-close a, .hc-offcanvas-nav .nav-back a {
+    background: #fff;
+    border-top: unset;
+    border-bottom: unset;
+}
+
+.hc-offcanvas-nav .nav-content>.nav-close a {
+    font-size: 14px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.hc-offcanvas-nav .nav-close-button span::before, .hc-offcanvas-nav .nav-close-button span::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-top: -3px;
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+}
+
+.hc-offcanvas-nav .nav-wrapper>.nav-content>ul:first-of-type>li:first-child:not(.nav-back):not(.nav-close)>.nav-item-wrapper>.nav-item-link {
+    border-top: 1px solid #ddd;
 }

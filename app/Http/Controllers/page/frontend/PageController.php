@@ -241,6 +241,9 @@ class PageController extends Controller
             ->with('fields')
             ->first();
 
+        $thmer = getSlider('thmer');
+        $comment = getSlider('comment');
+
         $fields = [];
         if (!empty($page->fields)) {
             foreach ($page->fields as $item) {
@@ -309,7 +312,7 @@ class PageController extends Controller
         $seo['meta_description'] = !empty($page['meta_description']) ? $page['meta_description'] : '';
         $seo['meta_image'] = !empty($page['image']) ? url($page['image']) : '';
         
-        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_edu', 'th_leauge', 'th_sport'));
+        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_edu', 'th_leauge', 'th_sport', 'thmer', 'comment'));
     }
     
     public function scheduleSampling(Request $request)

@@ -7,8 +7,8 @@
     {{-- Block 1 --}}
     <section class="mt-[55px]">
         <div class="container">
-            <div class="flex gap-[25px]">
-                <div class="flex-1 mt-[40px]">
+            <div class="xl:flex xl:flex-row gap-[25px]">
+                <div class="2xl:flex-1 xl:w-full w-full mt-[40px]">
                     @if($noibat && $noibat->isNotEmpty())
                         @foreach($noibat as $cat)
                             <div>
@@ -32,8 +32,8 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="w-[890px]">
-                    <h1 class="font-extrabold text-[60px] text-color_primary text-center">THM 360</h1>
+                <div class="3xl:w-[890px] 2xl:w-[640px] xl:mt-0 mt-5 w-full">
+                    <h1 class="font-extrabold 2xl:text-[60px] text-[50px] text-f40px text-color_primary text-center">THM 360</h1>
                     <div class="mt-[35px] relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
                             <img src="/upload/images/logo/banner-360.jpg" class="h-[485px] w-full object-cover object-bottom" alt="">
@@ -56,73 +56,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-1 mt-[40px]">
+                <div class="2xl:flex-1 w-full mt-[40px]">
                     <div>
                         <span class="text-f30 font-extrabold block">Top bình luận</span>
                         <div class="mt-[50px]">
-                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[24px] px-[15px] rounded-[30px]">
-                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                <div class="ml-[25px]">
-                                    <h4 class="font-bold text-f25" style="
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 1;
-                                    display: -webkit-box;
-                                ">Lorem ipsum dolor sit amet </h4>
-                                    <div class="text-f16 mt-2" style="
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 3;
-                                    display: -webkit-box;
-                                ">
-                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
+                            @if( $comment && $comment->slides->isNotEmpty() )
+                                @foreach( $comment->slides as $slide )
+                                    <div class="flex bg-[#EAEAE5] mt-[22px] py-[24px] px-[15px] rounded-[30px] th360-comment">
+                                        <img src="{{ asset($slide->src) }}" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
+                                        <div class="ml-[25px]">
+                                            <h4 class="font-bold 2xl:text-f25 md:text-f21 text-f20" style="
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            -webkit-box-orient: vertical;
+                                            -webkit-line-clamp: 1;
+                                            display: -webkit-box;
+                                        "><a href="{{ $slide->link }}">{{ $slide->title }}</a></h4>
+                                            <div class="text-f16 mt-2" style="
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            -webkit-box-orient: vertical;
+                                            -webkit-line-clamp: 3;
+                                            display: -webkit-box;
+                                        ">
+                                                {{ $slide->description }}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[24px] px-[15px] rounded-[30px]">
-                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                <div class="ml-[25px]">
-                                    <h4 class="font-bold text-f25"  style="
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 1;
-                                    display: -webkit-box;
-                                ">Lorem ipsum dolor sit amet </h4>
-                                    <div class="text-f16 mt-2" style="
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 3;
-                                    display: -webkit-box;
-                                ">
-                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[24px] px-[15px] rounded-[30px]">
-                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                <div class="ml-[25px]">
-                                    <h4 class="font-bold text-f25"  style="
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 1;
-                                    display: -webkit-box;
-                                ">Lorem ipsum dolor sit amet </h4>
-                                    <div class="text-f16 mt-3" style="
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 2;
-                                    display: -webkit-box;
-                                ">
-                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                    </div>
-                                </div>
-                            </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -134,8 +96,8 @@
     {{-- Block 2 --}}
     <section class="mt-[65px]">
         <div class="container">
-            <div class="flex gap-[30px]">
-                <div class="w-[1200px]">
+            <div class="xl:flex gap-[30px]">
+                <div class="2xl:w-[1200px] xl:w-[800px] w-full">
                     @if($th_zoom && $th_zoom->isNotEmpty())
                         @foreach($th_zoom as $cat)
                             <h3 class="font-bold text-[40px] uppercase">{{ $cat->title }}</h3>
@@ -168,100 +130,25 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="flex-1 mt-[25px]">
+                <div class="xl:flex-1 w-full mt-[25px]">
                     <h3 class="font-extrabold text-f30">THMer Sôi nổi</h3>
-                    <div class="mt-[40px] h-[620px] overflow-y-scroll scroll-bds">
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-1.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
+                    @if( $thmer && $thmer->slides->isNotEmpty() )
+                        <div class="mt-[40px] h-[620px] overflow-y-scroll scroll-bds">
+                            @foreach( $thmer->slides as $k => $slide )
+                            <div class="flex gap-[25px] items-center mb-[32px]">
+                                <div class="w-[128px] h-[128px]">
+                                    <a href="{{ $slide->link }}">
+                                        <img src="{{ asset($slide->src) }}" class="w-full @if($k%2==0) rounded-[20px]  @else rounded-full @endif object-cover h-full" alt="">
+                                    </a>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="2xl:text-f26 text-f22 font-bold"><a href="{{ $slide->link }}">{{ $slide->title }}</a></h3>
+                                    <div class="2xl:text-f22 text-f21 text-color_primary">{{ $slide->description }}</div>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
+                            @endforeach
                         </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-2.jpg" class="w-full h-full object-cover rounded-full" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-3.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-4.jpg" class="w-full h-full object-cover rounded-full" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-3.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-4.jpg" class="w-full h-full object-cover rounded-full" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-3.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-4.jpg" class="w-full h-full object-cover rounded-full" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-3.jpg" class="w-full h-full object-cover rounded-[20px]" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[25px] items-center mb-[32px]">
-                            <div class="w-[128px] h-[128px]">
-                                <img src="/upload/images/logo/user-4.jpg" class="w-full h-full object-cover rounded-full" alt="">
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-f26 font-bold">Kristin Watson</h3>
-                                <div class="text-f22 text-color_primary">Marketing Coordinator</div>
-                            </div>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
             <div class="text-center">
@@ -279,7 +166,7 @@
                     <h3 class="font-bold text-[40px] text-center">{{ $cat->title }}</h3>
                     <div class="grid grid-cols-4 gap-[12px] mt-[35px]">
                         @foreach ($cat->posts as $k => $post)
-                            <div class="@if( $k == 0 ) col-span-4 @endif relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="@if( $k == 0 ) lg:col-span-4 md:col-span-4 @else md:col-span-2 @endif relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
                                     <img src="{{asset($post->image)}}" class="@if($k==0) h-[345px] @else h-[255px] @endif  w-full object-cover object-bottom" alt="">
                                 </div>
@@ -323,7 +210,7 @@
                         @foreach( $cat->posts as $k => $post )
                             <div class="@if( $k==0 ) 2xl:col-span-6 @elseif($k>0 && $k<3) 2xl:col-span-3 @else 2xl:col-span-4  @endif lg:col-span-4 sm:col-span-6 col-span-12 relative rounded-[30px] overflow-hidden">
                                 <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                    <img src="{{asset($post->image)}}" class="@if( $k<3 ) h-[360px]  @else h-[255px]  @endif w-full object-cover object-bottom" alt="">
+                                    <img src="{{asset($post->image)}}" class="@if( $k<3 ) lg:h-[360px]  @else lg:h-[255px]  @endif h-[255px] w-full object-cover object-bottom" alt="">
                                 </div>
                                 <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
                                     <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a></li>
@@ -356,8 +243,8 @@
             <section class="mt-[85px]">
                 <div class="container">
                     <h3 class="font-bold text-[40px]">{{ $cat->title }}</h3>
-                    <div class="flex mt-[40px] gap-[30px]">
-                        <div class="w-[590px] h-[630px] overflow-y-scroll scroll-bds">
+                    <div class="xl:flex mt-[40px] gap-[30px]">
+                        <div class="xl:w-[590px] w-full h-[630px] overflow-y-scroll scroll-bds">
                             @foreach( $cat->posts as $k => $post )
                             <div class="flex gap-[30px] h-[200px] mb-[33px]">
                                 <div class="w-[245px]">
@@ -375,7 +262,7 @@
                             </div>
                             @endforeach
                         </div>
-                        <div class="flex-1">
+                        <div class="xl:flex-1 w-full xl:mt-0 mt-6">
                             @foreach( $cat->posts as $k => $post )
                                 @if($k == 0)
                                     <div class="relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">

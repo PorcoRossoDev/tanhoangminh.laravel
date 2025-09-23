@@ -306,6 +306,7 @@ Route::group(['middleware' => 'locale'], function () {
             Route::post('/update/{id}', [ArticleController::class, 'update'])->name('articles.update')->middleware('can:articles_edit');
             Route::get('/destroy/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy')->middleware('can:articles_destroy');
             Route::post('/select2', [ArticleController::class, 'select2']);
+            Route::get('/get-articles', [ArticleController::class, 'getArticle'])->name('articles.search');
         });
 
         //danh sách đăng ký cource
@@ -482,6 +483,7 @@ Route::group(['middleware' => 'locale'], function () {
             Route::get('edit/{id}', [CommentController::class, 'edit'])->name('comments.edit')->middleware('can:comments_edit');
             Route::post('update/{id}', [CommentController::class, 'update'])->name('comments.update')->middleware('can:comments_edit');
             Route::get('destroy', [CommentController::class, 'destroy'])->name('comments.destroy')->middleware('can:comments_destroy');
+            Route::get('get-comment', [CommentController::class, 'getComment'])->name('comments.getComment');
         });
         //customer category
         Route::group(['prefix' => '/customer-categories'], function () {

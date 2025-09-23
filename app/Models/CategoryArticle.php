@@ -33,7 +33,7 @@ class CategoryArticle extends Model
         return $this->hasMany(Catalogues_relationships::class, 'catalogueid')->where('module', '=', 'articles')
             ->join('articles', 'articles.id', '=', 'catalogues_relationships.moduleid')
             ->where(['articles.publish' => 0])
-            ->select('articles.id', 'articles.title', 'articles.slug', 'articles.description', 'articles.image', 'articles.created_at', 'catalogues_relationships.catalogueid')
+            ->select('articles.id', 'articles.title', 'articles.slug', 'articles.description', 'articles.image', 'articles.created_at', 'articles.article_highlight', 'articles.comment_highlight', 'catalogues_relationships.catalogueid')
             ->orderBy('articles.order', 'asc')->orderBy('articles.id', 'desc');
     }
     public function postsDBS()

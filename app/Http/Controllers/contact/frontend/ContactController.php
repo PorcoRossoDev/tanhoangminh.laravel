@@ -26,7 +26,7 @@ class ContactController extends Controller
 
         $contacts = [1, 2, 3];
 
-        $page = Page::where(['alanguage' => config('app.locale'), 'page' => 'contact'])->select('meta_title', 'meta_description', 'image', 'title', 'description')->first();
+        $page = Page::where(['alanguage' => config('app.locale'), 'page' => 'contact'])->with('fields')->select('meta_title', 'meta_description', 'image', 'title', 'description', 'id')->first();
         $seo['canonical'] = url('/');
         $seo['meta_title'] = !empty($page['meta_title']) ? $page['meta_title'] : $page['title'];
         $seo['meta_description'] = !empty($page['meta_description']) ? $page['meta_description'] : '';
@@ -43,8 +43,15 @@ class ContactController extends Controller
             'phone'    => 'required|string|max:20',
             'phongban' => 'required|string|max:255',
             'ykien'    => 'required|string|max:255',
-            'message'  => 'required|string',
+            //'message'  => 'required|string',
             'file'     => 'nullable|file|max:2048', // 2MB
+        ],[
+            'fullname.required' => 'Trường Họ và tên là trường bắt buộc.',
+            'email.required' => 'Email là trường bắt buộc.',
+            'email.email' => 'Email không đúng định dạng.',
+            'phongban.required' => 'Phòng ban là trường bắt buộc.',
+            'ykien.required' => 'Ý kiến là trường bắt buộc.',
+            'file.max' => 'Dung lượng file không được vượt quá 2MB.',
         ]);
         if ($validator->passes()) {
             $filePath = null;
@@ -71,6 +78,8 @@ class ContactController extends Controller
                 'phongban' => $request->phongban,
                 'ykien'    => $request->ykien,
                 'message'  => $request->message,
+                'type'  => 'contact',
+                'created_at' => Carbon::now(),
                 'file'=> $filePath,
             ]);
             if ($contact > 0) {

@@ -128,6 +128,12 @@ echo breadcrumb_backend($array);
             @include('components.image',['action' => 'update','name' => 'image','title'=> 'Ảnh đại diện'])
             @include('components.tag',['module' => $module])
             @include('components.publish')
+            @php
+                $homeSlide = json_decode($fcSystem['homepage_slide'], true);
+            @endphp
+            @if( in_array($detail->catalogues->id, $homeSlide) )
+                @include('article.backend.article.common.new', ['articleHighlight' => $articleHighlight, 'commentHighlight' => $commentHighlight])
+            @endif
         </div>
     </form>
 </div>

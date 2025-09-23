@@ -9,7 +9,7 @@ class Article extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'slug', 'catalogue_id', 'catalogue', 'image', 'content', 'description', 'meta_title', 'meta_description', 'image_json', 'userid_created', 'userid_updated', 'created_at', 'updated_at', 'publish', 'order', 'alanguage', 'products'
+        'title', 'slug', 'catalogue_id', 'catalogue', 'image', 'content', 'description', 'meta_title', 'article_highlight', 'comment_highlight', 'meta_description', 'image_json', 'userid_created', 'userid_updated', 'created_at', 'updated_at', 'publish', 'order', 'alanguage', 'products'
     ];
     public function user()
     {
@@ -34,5 +34,9 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class, 'module_id', 'id')->where('module', '=', 'articles')->where('parentid', 0);
+    }
+    public function fields()
+    {
+        return $this->hasMany(ConfigPostmeta::class, 'module_id')->where(['module' => 'articles'])->select('module_id', 'meta_key', 'meta_value');
     }
 }

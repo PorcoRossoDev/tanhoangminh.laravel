@@ -126,7 +126,7 @@
             @endif
 
             <div class="relative mt-[135px]">
-                <div class="absolute bottom-0 left-0">
+                <div class="absolute bottom-0 left-0 hidden lg:block">
                     <svg width="637" height="535" viewBox="0 0 637 535" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_877_1407" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="151" width="637" height="384">
                         <rect width="637" height="384" transform="matrix(-1 0 0 1 637 151)" fill="#D9D9D9"/>
@@ -212,13 +212,13 @@
                 @endif
 
                 <div class="text-center relative z-10">
-                    <div class="w-[795px] inline-block">
+                    <div class="xl:w-[795px] w-full inline-block">
                         <div class="font-misslegate text-[70px]">{{ $fcSystem['title_1'] }}</div>
                         <div class="uppercase 3xl:text-[50px] xl:text-[40px] lg:text-f30 text-f35 text-color_primary font-bold relative">{{ $fcSystem['title_2'] }}</div>
                         <div class="3xl:text-f30 xl:text-f25 text-f20 mt-[25px] font-medium">{!! $fcSystem['title_3'] !!}</div>
                     </div>
                 </div>
-                <div class="absolute bottom-0 right-0">
+                <div class="absolute bottom-0 right-0 hidden lg:block">
                     <svg width="637" height="373" viewBox="0 0 637 373" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_877_1403" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="-17" width="637" height="390">
                         <rect y="-17" width="637" height="390" fill="#D9D9D9"/>

@@ -145,4 +145,17 @@ class CommentController extends Controller
         ]);
         return redirect()->route('comments.edit', ['id' => $id])->with('success', "Phản hồi bình luận thành công");
     }
+
+    public function getComment(Request $request)
+    {
+        $keyword = $request->q;
+        $data = Comment::where('message', 'LIKE', "%{$keyword}%")->get();
+        $result = $data->map(function($item){
+            return [
+                'value' => $item->id,
+                'text'  => $item->title,
+            ];
+        });
+        return response()->json($result);
+    }
 }

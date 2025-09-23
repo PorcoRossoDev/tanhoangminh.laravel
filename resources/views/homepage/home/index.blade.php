@@ -2,516 +2,118 @@
 @section('content')
     <div class="main-page">
         
+        @php
+            $slide = getSlideHome($fcSystem['homepage_slide']);
+            // dd($slide);
+        @endphp
         {{-- Block 1 --}}
-        <section class="section-home pb-[80px]">
-            <div class="container">
-                <div class="swiper-for-one swiper-container wow fadeInUp">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div>
-                                <img src="/upload/images/logo/banner-home.jpg" class="w-full h-[350px] object-cover rounded-[30px]" alt="">
-                            </div>
-            
-                            <div class="grid grid-cols-12 gap-[30px] mt-[55px]">
-                                <div class="col-span-6">
-                                    <h3 class="uppercase font-extrabold text-f30">Tin nổi bật</h3>
-                                    <div class="grid grid-cols-12 gap-[12px] mt-[22px]">
-                                        <div class="col-span-7">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-1.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] relative z-10 w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
+        @if( $slide && $slide->posts->isNotEmpty() )
+            <section class="section-home lg:pb-[80px] md:pb-[60px] pb-[40px]">
+                <div class="container">
+                    <div class="swiper-for-one swiper-container wow fadeInUp">
+                        <div class="swiper-wrapper">
+                            @foreach( $slide->posts as $post )
+                                @php
+                                    $noibatID = json_decode($post->article_highlight, true);
+                                    $noibat = getHighLightPost($noibatID);
+                                    $thmer = getDataJson($post->postmetas, 'config_colums_json_slide_thmer');
+                                    $comment = getDataJson($post->postmetas, 'config_colums_json_slides_top_slide');
+                                @endphp
+                                <div class="swiper-slide">
+                                    <div>
+                                        <img src="{{ asset($post->image) }}" class="w-full 3lx:h-[350px] 2xl:h-[240px] lg:h-[260px] object-cover rounded-[30px]" alt="">
+                                    </div>
+                    
+                                    <div class="xl:flex gap-[30px] 3xl:mt-[55px] 2xl:mt-[30px] mt-[30px]">
+                                        <div class="3xl:w-[895px] 2xl:w-[660px] xl:w-1/2 w-full">
+                                            <h3 class="uppercase font-extrabold 3xl:text-f30 text-f24">Tin nổi bật</h3>
+                                            <div class="md:flex gap-[12px] mt-[22px]">
+                                                @foreach($noibat as $k => $item)
+                                                    <div class="@if($k==0) 3xl:w-[528px] 2xl:w-[400px] xl:w-1/2 md:w-1/2 w-full @else flex-1 @endif md:mb-0 mb-3">
+                                                        <div class="relative rounded-[30px] overflow-hidden">
+                                                            <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
+                                                                <img src="{{ asset($item->image) }}" class="3xl:h-[200px] 2xl:h-[145px] xl:h-[150px] lg:h-[250px] h-[170px] w-full object-cover object-bottom" alt="">
+                                                            </div>
+                                                            <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
+                                                                <li class="border py-[3px] px-[12px] 3xl:text-f16 text-f12 text-white rounded-[100px]"><a href="{{ route('routerURL', ['slug' => $item->catalogues->slug]) }}">{{ $item->catalogues->title }}</a></li>
+                                                                <li class="border py-[3px] px-[12px] 3xl:text-f16 text-f12 text-white rounded-[100px] ml-[12px]">{{ $item->created_at->format('M d, Y') }}</li>
+                                                            </ul>
+                                                            <div class="bg-color_primary 3xl:px-[22px] 3lx:py-[20px] p-[15px] relative z-10 w-full">
+                                                                <h4 class="text-f20 text-white font-semibold" style="
+                                                                overflow: hidden;
+                                                                text-overflow: ellipsis;
+                                                                -webkit-box-orient: vertical;
+                                                                -webkit-line-clamp: 2;
+                                                                display: -webkit-box;">
+                                                                    <a href="{{ route('routerURL', ['slug' => $item->slug]) }}">
+                                                                        {{ $item->title }}
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
-                                        <div class="col-span-5">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-2.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
+                                        <div class="flex-1 xl:mt-0 lg:mt-8 mt-9">
+                                            <div class="md:flex xl:gap-[12px] lg:gap-[150px] w-full">
+                                                <div class="3xl:w-[280px] 2xl:w-[205px] xl:w-[40%] lg:w-[250px] md:w-1/2 w-full">
+                                                    @if(isset($thmer))
+                                                    <h3 class="uppercase font-extrabold 3xl:text-f30 text-f24">THMer Sôi nổi</h3>
+                                                    <div class="grid grid-cols-2 gap-3 mt-[22px] lg:w-full md:w-[65%]">
+                                                        @foreach( $thmer->image as $k => $image )
+                                                            <div>
+                                                                <a href="{{ $thmer->url[$k] }}">
+                                                                    <img src="{{ asset($image) }}" class="3xl:h-[130px] 2xl:h-[96px] xl:h-[110px] lg:h-[120px] md:h-[100px] h-[190px] @if($k == 0 || $k == 3) rounded-[20px] @else rounded-full @endif w-full object-cover object-center" alt="">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    @endif
                                                 </div>
-                                                <ul class="absolute inline-flex left-[22px] top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
+                                                <div class="lg:flex-1 md:w-1/2 md:mt-0 mt-7">
+                                                    <h3 class="uppercase font-extrabold 3xl:text-f30 text-f24">Top bình  luận</h3>
+                                                    @if(isset($comment))
+                                                        <div class="3xl:mt-[22px] lg:mt-5 mt-[14px]">
+                                                            @foreach( $comment->image as $k => $image )
+                                                                <div class="flex bg-[#EAEAE5] lg:gap-x-[25px] 3xl:mb-[22px] 2xl:mb-3 xl:mb-3 mb-4 3xl:py-[20px] 3xl:px-[18px] p-[15px] rounded-[30px]">
+                                                                    <div class="3xl:w-[85px] 3xl:h-[85px] 2xl:w-[80px] 2xl:h-[80px] lg:h-[90px] md:h-[70px] md:w-[90px]">
+                                                                        <img src="{{ asset($image) }}" class="w-full h-full rounded-full object-cover" alt="">
+                                                                    </div>
+                                                                    <div class="flex-1">
+                                                                        <div class="comment-home">
+                                                                            <h4 class="font-bold 3xl:text-f25 text-f18">
+                                                                                <a href="{{ $comment->url[$k] }}" class="lg:whitespace-normal whitespace-nowrap" style="overflow: hidden;">{{ $comment->title[$k] }}</a>
+                                                                            </h4>
+                                                                            <div class="3xl:text-f16 text-f14 mt-2" style="
+                                                                            overflow: hidden;
+                                                                            text-overflow: ellipsis;
+                                                                            -webkit-box-orient: vertical;
+                                                                            -webkit-line-clamp: 2;
+                                                                            display: -webkit-box;
+                                                                        ">
+                                                                                
+                                                                            {{ $comment->desc[$k] }}
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-span-6">
-                                    <div class="grid grid-cols-12 gap-[12px]">
-                                        <div class="col-span-4">
-                                            <h3 class="uppercase font-extrabold text-f30">THMer Sôi nổi</h3>
-                                            <img src="/upload/images/logo/groups-user.jpg" class="mt-[22px] h-[255px]" alt="">
-                                        </div>
-                                        <div class="col-span-8">
-                                            <h3 class="uppercase font-extrabold text-f30">Top bình  luận</h3>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div>
-                                <img src="/upload/images/logo/banner-home.jpg" class="w-full h-[350px] object-cover rounded-[30px]" alt="">
-                            </div>
-            
-                            <div class="grid grid-cols-12 gap-[30px] mt-[55px]">
-                                <div class="col-span-6">
-                                    <h3 class="uppercase font-extrabold text-f30">Tin nổi bật</h3>
-                                    <div class="grid grid-cols-12 gap-[12px] mt-[22px]">
-                                        <div class="col-span-7">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-1.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] relative z-10 w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-span-5">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-2.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-span-6">
-                                    <div class="grid grid-cols-12 gap-[12px]">
-                                        <div class="col-span-4">
-                                            <h3 class="uppercase font-extrabold text-f30">THMer Sôi nổi</h3>
-                                            <img src="/upload/images/logo/groups-user.jpg" class="mt-[22px] h-[255px]" alt="">
-                                        </div>
-                                        <div class="col-span-8">
-                                            <h3 class="uppercase font-extrabold text-f30">Top bình  luận</h3>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div>
-                                <img src="/upload/images/logo/banner-home.jpg" class="w-full h-[350px] object-cover rounded-[30px]" alt="">
-                            </div>
-            
-                            <div class="grid grid-cols-12 gap-[30px] mt-[55px]">
-                                <div class="col-span-6">
-                                    <h3 class="uppercase font-extrabold text-f30">Tin nổi bật</h3>
-                                    <div class="grid grid-cols-12 gap-[12px] mt-[22px]">
-                                        <div class="col-span-7">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-1.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] relative z-10 w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-span-5">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-2.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-span-6">
-                                    <div class="grid grid-cols-12 gap-[12px]">
-                                        <div class="col-span-4">
-                                            <h3 class="uppercase font-extrabold text-f30">THMer Sôi nổi</h3>
-                                            <img src="/upload/images/logo/groups-user.jpg" class="mt-[22px] h-[255px]" alt="">
-                                        </div>
-                                        <div class="col-span-8">
-                                            <h3 class="uppercase font-extrabold text-f30">Top bình  luận</h3>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div>
-                                <img src="/upload/images/logo/banner-home.jpg" class="w-full h-[350px] object-cover rounded-[30px]" alt="">
-                            </div>
-            
-                            <div class="grid grid-cols-12 gap-[30px] mt-[55px]">
-                                <div class="col-span-6">
-                                    <h3 class="uppercase font-extrabold text-f30">Tin nổi bật</h3>
-                                    <div class="grid grid-cols-12 gap-[12px] mt-[22px]">
-                                        <div class="col-span-7">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-1.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] relative z-10 w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-span-5">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-2.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-span-6">
-                                    <div class="grid grid-cols-12 gap-[12px]">
-                                        <div class="col-span-4">
-                                            <h3 class="uppercase font-extrabold text-f30">THMer Sôi nổi</h3>
-                                            <img src="/upload/images/logo/groups-user.jpg" class="mt-[22px] h-[255px]" alt="">
-                                        </div>
-                                        <div class="col-span-8">
-                                            <h3 class="uppercase font-extrabold text-f30">Top bình  luận</h3>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div>
-                                <img src="/upload/images/logo/banner-home.jpg" class="w-full h-[350px] object-cover rounded-[30px]" alt="">
-                            </div>
-            
-                            <div class="grid grid-cols-12 gap-[30px] mt-[55px]">
-                                <div class="col-span-6">
-                                    <h3 class="uppercase font-extrabold text-f30">Tin nổi bật</h3>
-                                    <div class="grid grid-cols-12 gap-[12px] mt-[22px]">
-                                        <div class="col-span-7">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-1.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] relative z-10 w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-span-5">
-                                            <div class="relative rounded-[30px] overflow-hidden">
-                                                <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                    <img src="/upload/images/logo/news-2.jpg" class="h-[175px] w-full object-cover object-bottom" alt="">
-                                                </div>
-                                                <ul class="absolute inline-flex left-[22px] top-[27px]">
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px]">Văn hóa</li>
-                                                    <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] ml-[12px]">March 20, 2025</li>
-                                                </ul>
-                                                <div class="bg-color_primary px-[22px] py-[20px] w-full">
-                                                    <h4 class="text-f20 text-white font-semibold" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Tips for First-Time Homebuyers: 
-                                                        A Comprehensive Guide
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-span-6">
-                                    <div class="grid grid-cols-12 gap-[12px]">
-                                        <div class="col-span-4">
-                                            <h3 class="uppercase font-extrabold text-f30">THMer Sôi nổi</h3>
-                                            <img src="/upload/images/logo/groups-user.jpg" class="mt-[22px] h-[255px]" alt="">
-                                        </div>
-                                        <div class="col-span-8">
-                                            <h3 class="uppercase font-extrabold text-f30">Top bình  luận</h3>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex bg-[#EAEAE5] mt-[22px] py-[15px] px-[18px] rounded-[30px]">
-                                                <img src="/upload/images/logo/comment.jpg" class="w-[85px] h-[85px] rounded-full object-cover" alt="">
-                                                <div class="ml-[25px]">
-                                                    <h4 class="font-bold text-f25">Lorem ipsum dolor sit amet </h4>
-                                                    <div class="text-f16 mt-2" style="
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    -webkit-box-orient: vertical;
-                                                    -webkit-line-clamp: 2;
-                                                    display: -webkit-box;
-                                                ">
-                                                        Lorem ipsum dolor sit amet consectetur,Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         {{-- Block 2 --}}
         @php
@@ -669,11 +271,11 @@
             <section class="mt-[110px]">
                 <div class="container">
                     <div class="xl:flex 3xl:gap-[170px] 2xl:gap-[85px] xl:gap-[50px] mt-[22px] tabBlock">
-                        <div class="flex-1 lg:flex xl:justify-center justify-left items-center wow fadeInLeft">
+                        <div class="flex-1 lg:flex 2xl:justify-left justify-center items-center wow fadeInLeft">
                             <div>
-                                <h3 class="3xl:text-[131px] 2xl:text-[110px] xl:text-[75px] text-center sm:text-[54px] text-[36px] font-bold uppercase 3xl:leading-[105px] 2xl:leading-[100px] xl:leading-[70px]">{{ $homeMedia->title }}</h3>
+                                <h3 class="3xl:text-[131px] 2xl:text-[110px] xl:text-left xl:text-[75px] text-center sm:text-[54px] text-[36px] font-bold uppercase 3xl:leading-[105px] 2xl:leading-[100px] xl:leading-[70px]">{{ $homeMedia->title }}</h3>
                                 <div class="2xl:mt-[35px] xl:mt-[40px] mt-[30px]">
-                                    <ul class="tabBlock-tabs">
+                                    <ul class="tabBlock-tabs xl:text-left text-center">
                                         @foreach( $homeMedia->children as $k => $cat )
                                             <li class="inline-block"><a href="javascript:void(0)" data-tab="data-tab-{{ $k }}" class="tabBlock-tab border @if( $k ==0 ) border-color_primary bg-color_primary text-white @else border-black @endif rounded-[115px] text-f18 mr-[20px]  py-[3px] px-[14px] inline-block hover:border-color_primary duration-300">{{ $cat->title }}</a></li>
                                         @endforeach
@@ -686,7 +288,7 @@
                             <div class="tabBlock-content">
                                 @foreach( $homeMedia->children as $k => $cat )
                                     <div class="tabBlock-pane" id="data-tab-{{$k}}" @if($k>0) style="display: none" @endif>
-                                        <h3 class="3xl:text-f36 2xl:text-f32 xl:text-f30 sm:text-f24 text-center sm:mt-[30px] mt-[30px] font-bold text-color_primary">{{showField($cat->fields, 'config_colums_input_video_title_tab')}}</h3>
+                                        <h3 class="3xl:text-f36 2xl:text-f32 xl:text-f30 sm:text-f24 xl:text-left text-center sm:mt-[30px] mt-[30px] font-bold text-color_primary">{{showField($cat->fields, 'config_colums_input_video_title_tab')}}</h3>
                                         <div class="grid grid-cols-12 gap-[12px] mt-[30px]">
                                             @if( isset($cat->listMedia) )
                                                 @foreach( $cat->listMedia as $k => $post )
@@ -732,7 +334,7 @@
                 <div class="container tabBlock">
                     <div class="xl:flex justify-between items-center lg:text-left text-center mb-[45px] wow fadeInUp">
                         <h3 class="font-bold 3xl:text-[64px] 2xl:text-[56px] sm:text-[54px] text-[36px] lg:mt-0 mt-[40px]">{{ $homeBDS->title }}</h3>
-                        <ul class="tabBlock-tabs lg:mt-0 mt-[30px]">
+                        <ul class="tabBlock-tabs xl:mt-0 mt-[30px]">
                             @foreach( $homeBDS->children as $k => $cat )
                                 <li class="inline-block"><a href="javascript:void(0)" data-tab="data-bds-{{ $k }}" class="tabBlock-tab sm:mb-0 mb-1 border @if( $k ==0 ) border-color_primary bg-color_primary text-white @else border-black @endif rounded-[115px] text-f18 sm:mr-[20px] mr-[10px] py-[3px] px-[14px] inline-block hover:border-color_primary duration-300">{{ $cat->title }}</a></li>
                             @endforeach

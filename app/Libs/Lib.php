@@ -320,3 +320,31 @@ if (!function_exists('hasVideoExtension')) {
         return in_array($ext, $videoExtensions);
     }
 }
+
+if (!function_exists('getSlideHome')) {
+    function getSlideHome($id = 0) {
+        $results = null;
+        if( !empty($id) ) {
+            // Chuyển JSON string -> array
+            $decoded = json_decode($id, true);
+
+            // Lấy giá trị đầu tiên
+            $singleValue = is_array($decoded) ? (int)reset($decoded) : $decoded;
+            if( $singleValue > 0 ) {
+                $results = \App\Models\CategoryArticle::with('posts.postmetas')->find($singleValue);
+                
+            }
+        }
+        return $results;
+    }
+}
+
+if (!function_exists('getHighLightPost')) {
+    function getHighLightPost($ids = []) { 
+        $result = null;    
+        if( isset($ids) && is_array($ids) && count($ids) ){
+            $result = \App\Models\Article::whereIn('id', $ids)->with('catalogues')->get();
+        }        
+        return $result;
+    }
+}

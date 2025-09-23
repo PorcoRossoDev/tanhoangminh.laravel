@@ -110,6 +110,7 @@ echo breadcrumb_backend($array);
             @include('components.image',['action' => 'create','name' => 'image','title'=> 'Ảnh đại diện'])
             @include('components.tag',['module' => $module])
             @include('components.publish')
+            @include('article.backend.article.common.new', ['articleHighlight' => $articleHighlight, 'commentHighlight' => $commentHighlight])
         </div>
     </form>
 </div>

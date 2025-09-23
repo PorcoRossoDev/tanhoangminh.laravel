@@ -90,8 +90,8 @@ class PageController extends Controller
             $arrID = array(32,33);
             $order = implode(',', $arrID);
             $field = \App\Models\ConfigColum::where(['trash' => 0, 'publish' => 0, 'module' => $module])->whereIn('id', $arrID)->orderByRaw("FIELD(id, $order)")->get();
-        } else if ($detail->id == 66) {
-            $arrID = array( 41 );
+        } else if ($detail->id == 78) {
+            $arrID = array( 36,34,35 );
             $order = implode(',', $arrID);
             $field = \App\Models\ConfigColum::where(['trash' => 0, 'publish' => 0, 'module' => $module])->whereIn('id', $arrID)->orderByRaw("FIELD(id, $order)")->get();
         } else if ($detail->id == 79) {

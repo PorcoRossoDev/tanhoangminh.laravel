@@ -15,18 +15,21 @@ use App\Models\CategoryArticle;
 use App\Models\Tag;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\PostRequest;
+use App\Components\System;
 
 class ArticleController extends Controller
 {
     protected $Nestedsetbie;
     protected $Helper;
     protected $Polylang;
+    protected $system;
     protected $table = 'articles';
     public function __construct()
     {
         $this->Nestedsetbie = new Nestedsetbie(array('table' => 'category_articles'));
         $this->Helper = new Helper();
         $this->Polylang = new Polylang();
+        $this->system = new System();
     }
     public function index(Request $request)
     {
@@ -80,12 +83,14 @@ class ArticleController extends Controller
         if (old('tags')) {
             $getTags = old('tags');
         }
+        $articleHighlight = null;
+        $commentHighlight = null;
         // $tags = relationships('\App\Models\Tag', $getTags);
         //end tag
         $tags = Tag::select('id', 'title')->where('module', 'articles')->where('alanguage', config('app.locale'))->orderBy('order', 'asc')->orderBy('id', 'desc')->get();
         $products = dropdown(\App\Models\Product::select('id', 'title')->where('alanguage', config('app.locale'))->orderBy('order', 'asc')->orderBy('id', 'desc')->get(), 'Chọn sản phẩm', 'id', 'title');
         $field = \App\Models\ConfigColum::where(['trash' => 0, 'publish' => 0, 'module' => $module])->get();
-        return view('article.backend.article.create', compact('module', 'htmlCatalogue', 'tags', 'dropdown', 'getTags', 'action', 'field', 'products'));
+        return view('article.backend.article.create', compact('module', 'htmlCatalogue', 'tags', 'articleHighlight', 'commentHighlight', 'dropdown', 'getTags', 'action', 'field', 'products'));
     }
     public function store(PostRequest $request)
     {
@@ -112,10 +117,11 @@ class ArticleController extends Controller
     }
     public function edit($id)
     {
+        $fcSystem = $this->system->fcSystem();
         $dropdown = getFunctions();
         $module = $this->table;
         $action = 'update';
-        $detail  = Article::where('alanguage', config('app.locale'))->find($id);
+        $detail  = Article::where('alanguage', config('app.locale'))->with('catalogues')->find($id);
         if (!isset($detail)) {
             return redirect()->route('articles.index')->with('error', "Bài viết không tồn tại");
         }
@@ -129,6 +135,32 @@ class ArticleController extends Controller
                 $getTags[] = $v['tag_id'];
             }
         }
+        $articleHighlightID = json_decode($detail->article_highlight);
+        $articleHighlight = null;
+        if( isset($articleHighlightID) && is_array($articleHighlightID) && count($articleHighlightID) ){
+            $articleHighlight = Article::where(['alanguage' => config('app.locale')])->whereIn('id', $articleHighlightID)->get();
+            $articleHighlight = $articleHighlight->map(function($item){
+                return [
+                    'value' => $item->id,
+                    'text'  => $item->title,
+                ];
+            });
+        }
+
+        $commentHighlightID = json_decode($detail->comment_highlight);
+        $commentHighlight = null;
+        if( isset($commentHighlightID) && is_array($commentHighlightID) && count($commentHighlightID) ){
+            $commentHighlight = \App\Models\Comment::where(['alanguage' => config('app.locale')])->whereIn('id', $commentHighlightID)->get();
+            $commentHighlight = $commentHighlight->map(function($item){
+                return [
+                    'value' => $item->id,
+                    'text'  => $item->title,
+                ];
+            });
+        }
+        
+
+
         $tags = Tag::select('id', 'title')->where('module', 'articles')->where('alanguage', config('app.locale'))->orderBy('order', 'asc')->orderBy('id', 'desc')->get();
         // $tags = relationships('\App\Models\Tag', $getTags);
         //end tag
@@ -146,7 +178,7 @@ class ArticleController extends Controller
         }
         $field = \App\Models\ConfigColum::where(['trash' => 0, 'publish' => 0, 'module' => $module])->get();
         $products = dropdown(\App\Models\Product::select('id', 'title')->where('alanguage', config('app.locale'))->orderBy('order', 'asc')->orderBy('id', 'desc')->get(), 'Chọn sản phẩm', 'id', 'title');
-        return view('article.backend.article.edit', compact('module', 'detail', 'htmlCatalogue', 'tags', 'dropdown', 'getTags', 'action', 'getCatalogue', 'field', 'products', 'getProduct'));
+        return view('article.backend.article.edit', compact('module', 'detail', 'htmlCatalogue', 'tags', 'dropdown', 'fcSystem', 'articleHighlight', 'commentHighlight', 'getTags', 'action', 'getCatalogue', 'field', 'products', 'getProduct'));
     }
     public function update(Request $request, $id)
     {
@@ -202,6 +234,7 @@ class ArticleController extends Controller
             }
         }
         $tmp_catalogue = array_unique($tmp_catalogue);
+
         //end
         $_data = [
             'title' => $request['title'],
@@ -212,6 +245,8 @@ class ArticleController extends Controller
             'content' => $request['content'],
             'catalogue' => json_encode($tmp_catalogue),
             'products' => json_encode($request['products']),
+            'article_highlight' => !empty($request['article_highlight']) ? json_encode($request['article_highlight']) : '',
+            'comment_highlight' => !empty($request['comment_highlight']) ? json_encode($request['comment_highlight']) : '',
             'image_json' =>  !empty($request['album']) ? json_encode($request['album']) : '',
             'meta_title' => $request['meta_title'],
             'meta_description' => $request['meta_description'],
@@ -258,5 +293,19 @@ class ArticleController extends Controller
 
     public function check( PostRequest $request ){
         $params = $request->validated();
+    }
+
+    public function getArticle(Request $request)
+    {
+        $keyword = $request->q;
+        $module = $request->module;
+        $data = Article::where('title', 'LIKE', "%{$keyword}%")->get();
+        $result = $data->map(function($item){
+            return [
+                'value' => $item->id,
+                'text'  => $item->title,
+            ];
+        });
+        return response()->json($result);
     }
 }

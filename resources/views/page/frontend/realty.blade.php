@@ -11,10 +11,10 @@
 
     <div class="mt-[35px]">
         <div class="container">
-            <h1 class="font-extrabold text-[60px] text-color_primary uppercase wow fadeInUp">{{$page->title}}</h1>
+            <h1 class="font-extrabold 3xl:text-[60px] 2xl:text-f40 lg:text-f30 text-f31 text-color_primary uppercase mt-[60px] mb-[50px] wow fadeInUp">{{$page->title}}</h1>
             @if($bds && $bds->isNotEmpty())
                 @foreach($bds as $cat)
-                    <div class="grid grid-cols-4 gap-[12px] mt-[20px]">
+                    <div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[12px] mt-[20px]">
                         @foreach ($cat->posts as $post)
                             <div class="relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
@@ -47,12 +47,12 @@
 
     <div class="mt-[70px]">
         <div class="container">
-            <div class="flex gap-[30px]">
-                <div class="w-[1200px]">
+            <div class="xl:flex gap-[30px]">
+                <div class="xl:w-[1200px] w-full">
                     @if($news && $news->isNotEmpty())
                         @foreach($news as $cat)
-                            <h3 class="font-bold text-[40px] uppercase">{{ $cat->title }}</h3>
-                            <div class="grid grid-cols-2 gap-[12px] mt-[40px]">
+                            <h3 class="font-bold md:text-[40px] text-f31 uppercase">{{ $cat->title }}</h3>
+                            <div class="grid md:grid-cols-2 grid-cols-1 gap-[12px] mt-[40px]">
                                 @foreach ($cat->posts as $post)
                                 <div class="relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
                                     <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
@@ -81,22 +81,22 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="flex-1">
+                <div class="flex-1 xl:mt-0 lg:mt-11 md:mt-[70px] mt-8">
                     @if($noibat && $noibat->isNotEmpty())
                         @foreach($noibat as $cat)
-                        <h3 class="font-extrabold text-[30px]">{{ $cat->title }}</h3>
-                        <div class="mt-[50px] h-[620px] overflow-y-scroll overflow-hidden scroll-bds">
+                        <h3 class="font-extrabold xl:text-[30px] lg:text-f40 text-f31 uppercase">{{ $cat->title }}</h3>
+                        <div class="xl:mt-[50px] mt-[30px] h-[620px] overflow-y-scroll overflow-hidden scroll-bds">
                             @foreach ($cat->posts as $post)
-                            <div class="flex gap-[25px] mb-[33px]">
-                                <div class="w-[230px]">
+                            <div class="md:flex gap-[25px] mb-[33px]">
+                                <div class="md:w-[230px]">
                                     <img src="{{asset($post->image)}}" class="w-full h-[200px] object-cover rounded-[20px]" alt="">
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 md:mt-0 mt-4">
                                     <div>
                                         <span class="text-color_primary">{{ $post->created_at->format('M d, Y') }}</span>
                                         <span class="ml-2"><a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a></span>
                                     </div>
-                                    <h4 class="text-f22 font-bold mt-[22px]">
+                                    <h4 class="3xl:text-f22 text-f20 font-bold mt-[22px]">
                                         <a href="{{route('routerURL', ['slug' => $post->slug])}}">
                                             {{$post->title}}
                                         </a>
@@ -119,12 +119,12 @@
         @foreach($kinhdoanh as $cat)
             <div class="mt-[85px]">
                 <div class="container">
-                    <h3 class="font-bold text-[40px] text-center">{{ $cat->title }}</h3>
-                    <div class="grid grid-cols-4 gap-[12px] mt-[35px]">
+                    <h3 class="font-bold md:text-[40px] text-f31 text-center">{{ $cat->title }}</h3>
+                    <div class="md:grid md:grid-cols-4  gap-[12px] mt-[35px]">
                         @foreach ($cat->posts as $k => $post)
-                            <div class="@if( $k == 0 ) col-span-4 @endif relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="@if( $k == 0 ) col-span-4 @else md:col-span-2  @endif relative rounded-[30px] md:mb-0 mb-3 overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                    <img src="{{asset($post->image)}}" class="@if($k==0) h-[345px] @else h-[255px] @endif  w-full object-cover object-bottom" alt="">
+                                    <img src="{{asset($post->image)}}" class="@if($k==0) md:h-[345px] @else md:h-[255px] @endif h-[255px] w-full object-cover object-bottom" alt="">
                                 </div>
                                 <ul class="absolute inline-flex left-[22px] z-10 top-[30px]">
                                     <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a></li>
@@ -156,15 +156,15 @@
 
     @if($cohoi && $cohoi->isNotEmpty())
         @foreach($cohoi as $cat)
-            <div>
+            <div class="xl:mt-0 lg:mt-10 md:mt-[70px] mt-[50px]">
                 <div class="container">
-                    <h3 class="font-bold text-[40px] uppercase">{{ $cat->title }}</h3>
+                    <h3 class="font-bold md:text-[40px] text-f31 uppercase">{{ $cat->title }}</h3>
                     <div class="mt-[30px]">
-                        <div class="flex gap-[25px]">
-                            <div class="w-[745px] px-[33px] py-[40px] bg-color_primary text-white rounded-[20px]">
+                        <div class="lg:flex gap-[25px]">
+                            <div class="xl:w-[745px] lg:w-1/2 w-full px-[33px] py-[40px] bg-color_primary text-white rounded-[20px]">
                                 @foreach ($cat->posts as $k => $post)
                                     <div class="flex pb-[20px] mb-[65px] border-b border-b-[#fff]">
-                                        <h3 class="flex-1 text-f24 font-semibold ">
+                                        <h3 class="flex-1 xl:text-f24 text-f21 font-semibold ">
                                             <a href="{{route('routerURL', ['slug' => $post->slug])}}">
                                                 {{$post->title}}
                                             </a>
@@ -181,9 +181,9 @@
                             <div class="flex-1">
                                 @foreach ($cat->posts as $k => $post)
                                     @if( $k==0 )
-                                        <div class="relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
+                                        <div class="relative rounded-[30px] lg:mt-0 mt-7 overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
                                             <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                                <img src="{{asset($post->image)}}" class="h-[610px] w-full object-cover object-bottom" alt="">
+                                                <img src="{{asset($post->image)}}" class="lg:h-[610px] h-auto w-full object-cover object-bottom" alt="">
                                             </div>
                                             <ul class="absolute inline-flex left-[22px] z-10 top-[30px]">
                                                 <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a></li>

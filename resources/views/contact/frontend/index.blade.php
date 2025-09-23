@@ -1,89 +1,85 @@
 @extends('homepage.layout.home')
 @section('content')
 
+    @php
+        $image = showField($page->fields, 'config_colums_input_contact_icon');
+        $ykien = explode(PHP_EOL, showField($page->fields, 'config_colums_textarea_contact_ykien'));
+        $phongban = explode(PHP_EOL, showField($page->fields, 'config_colums_textarea_contact_phongban'));
+    @endphp
     <div class="relative after:content[''] py-[60px] after:bg-[rgba(195,142,43,0.9)] after:absolute after:top-0 after:left-0 after:w-full after:h-full" style="background: url('upload/images/logo/bg-contact.png')">
         <div class="container">
             <div class="xl:flex justify-center">
                 <div class="xl:w-[1255px] relative z-10">
                     <h4 class="text-white text-f20 font-semibold">
                         <a href="{{ url('/') }}" class="flex items-center">
-                            <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.0996 0.820068C18.5598 0.820068 18.9329 1.19317 18.9329 1.65341V14.9923C18.9329 15.4494 18.5535 15.8201 18.1064 15.8201H3.09277C2.63631 15.8201 2.26627 15.4494 2.26627 14.9923V14.1534H17.2662V4.40341L10.5996 10.4034L2.26627 2.90341V1.65341C2.26627 1.19317 2.63937 0.820068 3.09961 0.820068H18.0996ZM7.26627 10.8201V12.4868H0.599609V10.8201H7.26627ZM4.76627 6.65341V8.32006H0.599609V6.65341H4.76627ZM16.9045 2.48674H4.29472L10.5996 8.16116L16.9045 2.48674Z" fill="#C38E2B"/>
-                            </svg>
-
+                            <img src="{{ asset('frontend/images/contact-arrow-left.svg') }}" class="h-[23px] w-[23px] mr-3" alt="">
                             Quay lại trang chủ
                         </a>
                     </h4>
                     <div class="xl:flex gap-[30px] bg-white rounded-[30px] mt-[22px] p-[25px]">
                         <div class="xl:w-[615px] w-full">
                             <div class=" xl:text-left text-center">
-                                <img src="upload/images/logo/contact-image.png" class="xl:h-auto lg:h-[285px] object-contain inline-block" alt="">
+                                <img src="{{ asset($image) }}" class="xl:h-auto lg:h-[285px] object-contain inline-block" alt="">
                                 <div class="xl:mt-[135px] mt-8 xl:text-f20 text-f18 leading-[28px] text-[#4F4F4F]">
                                     {!! $page->description !!}
                                 </div>
                             </div>
 
-                            <div class="mt-[20px]">
-                                <svg width="545" height="2" viewBox="0 0 545 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0 0.820068H545" stroke="url(#paint0_linear_748_2440)"/>
-                                    <defs>
-                                    <linearGradient id="paint0_linear_748_2440" x1="-nan" y1="-nan" x2="-nan" y2="-nan" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#D5D5D5"/>
-                                    <stop offset="1" stop-color="#D4D4D4" stop-opacity="0"/>
-                                    </linearGradient>
-                                    </defs>
-                                </svg>
-                            </div>
+                            <div class="mt-[20px] h-[1px] w-ful bg-[#D5D5D5]"></div>
                                 
                             <div class="text-f20 leading-[28px] mt-[20px] text-[#4F4F4F]">
                                 <h4 class="font-bold text-f14">Liên hệ hỗ trợ</h4>
                                 <div class="flex items-center">
-                                    <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M18.0996 0.820068C18.5598 0.820068 18.9329 1.19317 18.9329 1.65341V14.9923C18.9329 15.4494 18.5535 15.8201 18.1064 15.8201H3.09277C2.63631 15.8201 2.26627 15.4494 2.26627 14.9923V14.1534H17.2662V4.40341L10.5996 10.4034L2.26627 2.90341V1.65341C2.26627 1.19317 2.63937 0.820068 3.09961 0.820068H18.0996ZM7.26627 10.8201V12.4868H0.599609V10.8201H7.26627ZM4.76627 6.65341V8.32006H0.599609V6.65341H4.76627ZM16.9045 2.48674H4.29472L10.5996 8.16116L16.9045 2.48674Z" fill="#C38E2B"/>
-                                    </svg>
+                                    <img src="{{ asset('frontend/images/contact-email.svg') }}" class="h-[18px] w-[18px]" alt="">
                                     <span class="text-f14 ml-[10px]">{{ $fcSystem['contact_email'] }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="flex-1">
-                            <h3 class="lg:text-[40px] text-f30 font-bold leading-[100%] text-center text-color_primary lg:mt-0 mt-8">THM TALK</h3>
+                            <h3 class="lg:text-[40px] text-f30 font-bold leading-[100%] text-center text-color_primary lg:mt-0 mt-8">{{ $page->title }}</h3>
                             <form action="" id="form-submit-contact" class="mt-[25px]">
                                 @csrf
                                 @include('homepage.common.alert')
                                 <div class="grid grid-cols-2 gap-[20px]">
                                     <div class="col-span-2">
                                         <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[12px] block">Họ và tên</label>
-                                        <input type="text" name="fullname" class="outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
+                                        <input type="text" name="fullname" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
                                     </div>
                                     <div class="xl:col-span-1 col-span-2">
                                         <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[8px] block">Email</label>
-                                        <input type="text" name="email" class="outline-none px-3 h-[46px] rounded-[10px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
+                                        <input type="text" name="email" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
                                     </div>
                                     <div class="xl:col-span-1 col-span-2 xl:flex justify-end">
                                         <div>
                                             <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[8px] block">Số điện thoại</label>
-                                            <input type="text" name="phone" class="outline-none px-3 h-[46px] rounded-[10px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
+                                            <input type="text" name="phone" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-span-2">
                                         <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[8px] block">Phòng ban</label>
-                                        <select name="phongban" id="" class="outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]">
-                                            <option value="Phòng nhân sự">Phòng nhân sự</option>
-                                            <option value="Phòng kinh doanh">Phòng kinh doanh</option>
+                                        <select name="phongban" id="" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]">
+                                            @if(isset($phongban) && is_array($phongban) && count($phongban))
+                                                @foreach ($phongban as $val)
+                                                    <option value="{{ $val }}">{{ $val }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         <!-- <input type="text" name="fullname" class="hidden outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder=""> -->
                                     </div>
                                     <div class="col-span-2">
                                         <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[8px] block">Loại ý kiến</label>
-                                        <select name="ykien" id="" class="outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]">
-                                            <option value="Ý kiến A">Ý kiến A</option>
-                                            <option value="Ý kiến B">Ý kiến B</option>
+                                        <select name="ykien" id="" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]">
+                                            @if(isset($ykien) && is_array($ykien) && count($ykien))
+                                                @foreach ($ykien as $val)
+                                                    <option value="{{ $val }}">{{ $val }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         <!-- <input type="text" name="fullname" class="hidden outline-none px-3 h-[46px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder=""> -->
                                     </div>
                                     <div class="col-span-2">
                                         <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[8px] block">Ý kiến của bạn</label>
-                                        <textarea name="message" class="outline-none px-3 py-3 h-[130px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" id="" cols="30" rows="10"></textarea>
+                                        <textarea name="message" class="text-f14 outline-none px-3 py-3 h-[130px] rounded-[10px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" id="" cols="30" rows="10"></textarea>
                                     </div>
                                     
                                 </div>
@@ -116,7 +112,7 @@
                                         </clipPath>
                                         </defs>
                                     </svg>
-                                    <div class="ml-[15px] text-center">
+                                    <div class="ml-[15px] text-center" id="fileName">
                                         Kéo thả tệp tin của bạn ở đây <br>
                                         hoặc chọn tệp tin.
                                     </div>
@@ -130,7 +126,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('css')
@@ -149,6 +144,7 @@
     <script>
         $(document).ready(function(){
 
+            var textFileDefault = 'Kéo thả tệp tin của bạn ở đây <br> hoặc chọn tệp tin.'
             $("#openFile").on("click", function(){
                 $("#fileItem").click();
             });
@@ -157,8 +153,10 @@
                 if(this.files.length > 0){
                     let fileName = this.files[0].name;
                     $("#openFile .ml-[15px]").html("Đã chọn: " + fileName);
+                    $('#fileName').html(fileName)
                 }
             });
+
 
             $("#form-submit-contact").on("submit", function(e){
                 e.preventDefault();

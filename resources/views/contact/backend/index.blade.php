@@ -35,7 +35,10 @@ echo breadcrumb_backend($array);
                         </th>
                         <th class="whitespace-nowrap">STT</th>
                         <th class="whitespace-nowrap">Thông tin</th>
+                        <th class="whitespace-nowrap">Ý kiến</th>
+                        <th class="whitespace-nowrap">Phòng ban</th>
                         <th class="whitespace-nowrap">Nội dung</th>
+                        <th class="whitespace-nowrap">File</th>
                         <th class="whitespace-nowrap">Ngày gửi</th>
                     </tr>
                 </thead>
@@ -55,8 +58,23 @@ echo breadcrumb_backend($array);
                             <p><?php echo $v->email; ?></p>
                         </td>
                         <td>
+                            {{ $v->ykien }}
+                        </td>
+                        <td>
+                            {{ $v->phongban }}
+                        </td>
+                        <td>
                             {!! (!empty($v->subject)?$v->subject .'<br>':'') !!}
                             {{ !empty($v->message)?$v->message:'' }}
+                        </td>
+                        <td>
+                            <a href="{{ !empty($v->file) ? asset($v->file) : 'javascript:void(0)' }}" target="_blank">
+                                @if(!empty($v->file))
+                                    Link
+                                @else
+                                    -
+                                @endif
+                            </a>
                         </td>
                         <td>
                             {{$v->created_at}}
