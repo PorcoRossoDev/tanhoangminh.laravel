@@ -66,10 +66,17 @@
             <div class="grid md:grid-cols-2 grid-cols-1 gap-[15px]">
                 @if(isset($tamnhin))
                     @foreach($tamnhin->slides as $k => $slide)
-                        <div class="relative lg:h-[585px] h-[430px] rounded-[30px] flex justify-center bg-[linear-gradient(234.46deg,rgba(195,142,43,0)_48.58%,rgba(93,68,21,0.55)_77.96%),url('/frontend/images/bg-tam-nhin-su-menh-crop.jpg')] bg-cover bg-center wow fadeInUp" data-wow-delay="{{($k+1)*0.2}}s">
-                            <div class="flex justify-center flex-col">
+                        <div class="relative hover-tamnhin lg:h-[585px] h-[430px] overflow-hidden rounded-[30px] flex_ justify-center_ bg-[linear-gradient(234.46deg,rgba(195,142,43,0)_48.58%,rgba(93,68,21,0.55)_77.96%),url('/frontend/images/bg-tam-nhin-su-menh-crop.jpg')] bg-cover bg-center wow fadeInUp" data-wow-delay="{{($k+1)*0.2}}s">
+                            <div class="flex justify-center flex-col h-full">
                                 <div class="text-center"><img src="{{asset($slide->src)}}" class="lg:h-[130px] h-[95px] w-auto inline-block" alt=""></div>
                                 <h3 class="3xl:text-[120px] xl:text-[50px] md:text-f40 text-f27 3xl:mt-0 mt-[30px] font-semibold text-white text-center">{{$slide->title}}</h3>
+                            </div>
+                            <div class="hover flex flex-col justify-between h-full p-[40px] text-white">
+                                <div class="flex justify-between">
+                                    <h3 class="3xl:text-[64px] font-bold">{{$slide->title}}</h3>
+                                    <img src="{{asset($slide->src)}}" class="h-[90px]" alt="">
+                                </div>
+                                <div class="text-[36px]">{{ $slide->description }}</div>
                             </div>
                         </div>
                     @endforeach

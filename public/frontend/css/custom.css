@@ -330,3 +330,24 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active:after, span.swiper
 .hc-offcanvas-nav .nav-wrapper>.nav-content>ul:first-of-type>li:first-child:not(.nav-back):not(.nav-close)>.nav-item-wrapper>.nav-item-link {
     border-top: 1px solid #ddd;
 }
+
+.hover-tamnhin .hover {
+    transform: translateY(0);
+    transition: 0.4s;
+    width: 100%;
+}
+
+.hover-tamnhin > div {
+    width: 100%;
+    height: 100%;
+    transition: 0.4s;
+}
+
+.hover-tamnhin:hover > div:first-child {
+    transform: translateY(-100%);
+    transition: 0.4s;
+}
+
+.hover-tamnhin:hover > .hover {
+    transform: translateY(-100%);
+}

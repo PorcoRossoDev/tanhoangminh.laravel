@@ -1613,6 +1613,9 @@ video {
 .h-\[85px\] {
   height: 85px;
 }
+.h-\[90px\] {
+  height: 90px;
+}
 .h-\[95px\] {
   height: 95px;
 }
@@ -2854,6 +2857,9 @@ video {
 }
 .p-\[35px\] {
   padding: 35px;
+}
+.p-\[40px\] {
+  padding: 40px;
 }
 .p-\[5px\] {
   padding: 5px;
