@@ -83,7 +83,7 @@ class PageController extends Controller
             $order = implode(',', $arrID);
             $field = \App\Models\ConfigColum::where(['trash' => 0, 'publish' => 0, 'module' => $module])->whereIn('id', $arrID)->orderByRaw("FIELD(id, $order)")->get();
         } else if ($detail->id == 87) {
-            $arrID = array(22, 23, 24, 25, 26);
+            $arrID = array(22, 23, 24, 25, 26, 39);
             $order = implode(',', $arrID);
             $field = \App\Models\ConfigColum::where(['trash' => 0, 'publish' => 0, 'module' => $module])->whereIn('id', $arrID)->orderByRaw("FIELD(id, $order)")->get();
         } else if ($detail->id == 89) {

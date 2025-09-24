@@ -7,7 +7,7 @@
     {{-- Block 1 --}}
     <section class="mt-[55px]">
         <div class="container">
-            <div class="xl:flex xl:flex-row gap-[25px]">
+            <div class="xl:flex xl:flex-row gap-[25px] wow fadeInLeft">
                 <div class="2xl:flex-1 xl:w-full w-full mt-[40px]">
                     @if($noibat && $noibat->isNotEmpty())
                         @foreach($noibat as $cat)
@@ -32,7 +32,7 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="3xl:w-[890px] 2xl:w-[640px] xl:mt-0 mt-5 w-full">
+                <div class="3xl:w-[890px] 2xl:w-[640px] xl:mt-0 mt-5 w-full wow fadeInTop">
                     <h1 class="font-extrabold 2xl:text-[60px] text-[50px] text-f40px text-color_primary text-center">THM 360</h1>
                     <div class="mt-[35px] relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="2xl:flex-1 w-full mt-[40px]">
+                <div class="2xl:flex-1 w-full mt-[40px]  wow fadeInRight">
                     <div>
                         <span class="text-f30 font-extrabold block">Top bình luận</span>
                         <div class="mt-[50px]">
@@ -91,9 +91,8 @@
             </div>
         </div>
     </section>
-    
 
-    {{-- Block 2 --}}
+    {{-- Block Zoom && THMer --}}
     <section class="mt-[65px]">
         <div class="container">
             <div class="xl:flex gap-[30px]">
@@ -166,7 +165,7 @@
                     <h3 class="font-bold text-[40px] text-center">{{ $cat->title }}</h3>
                     <div class="grid grid-cols-4 gap-[12px] mt-[35px]">
                         @foreach ($cat->posts as $k => $post)
-                            <div class="@if( $k == 0 ) lg:col-span-4 md:col-span-4 @else md:col-span-2 @endif relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="@if( $k == 0 ) lg:col-span-4 md:col-span-4 @else  @endif relative rounded-[30px] overflow-hidden wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
                                     <img src="{{asset($post->image)}}" class="@if($k==0) h-[345px] @else h-[255px] @endif  w-full object-cover object-bottom" alt="">
                                 </div>

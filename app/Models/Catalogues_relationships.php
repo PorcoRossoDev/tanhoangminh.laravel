@@ -16,6 +16,21 @@ class Catalogues_relationships extends Model
     {
         return $this->hasMany(Comment::class, 'module_id', 'id')->where('module', '=', 'articles')->where('parentid', 0);
     }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(
+            Comment::class,
+            Article::class,
+            'id',        // articles.id
+            'module_id', // comments.module_id
+            'moduleid',  // catalogues_relationships.moduleid
+            'id'         // articles.id
+        )
+        ->where('comments.module', 'articles')
+        ->where('comments.parentid', 0);
+    }
+    
     public function tagsArticle()
     {
         return $this->hasMany(Tags_relationship::class, 'module_id', 'id')->where('tags_relationships.module', '=', 'articles')->join('tags', 'tags.id', '=', 'tags_relationships.tag_id');

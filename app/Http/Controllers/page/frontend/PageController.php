@@ -262,6 +262,16 @@ class PageController extends Controller
             ->get();
         }
 
+        $id_postNoiBat = !empty($fcSystem['thm360_5']) ? json_decode($fcSystem['thm360_5'], true) : 0;
+        $postNoiBat = null;
+        if( $id_noibat ){
+            $postNoiBat = \App\Models\Article::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_postNoiBat)
+            ->orderBy('order', 'asc')
+            ->get();
+        }
+
         $id_zoom = !empty($fcSystem['thm360_1']) ? json_decode($fcSystem['thm360_1'], true) : 0;
         $th_zoom = null;
         if( $id_zoom ){
@@ -270,7 +280,15 @@ class PageController extends Controller
             ->whereIn('id', $id_zoom)
             ->with(['posts'])
             ->orderBy('order', 'asc')
-            ->get();
+            ->get()
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(4)
+                    ->get();
+                return $cat;
+            });
         }
 
         $id_edu = !empty($fcSystem['thm360_2']) ? json_decode($fcSystem['thm360_2'], true) : 0;
@@ -281,7 +299,15 @@ class PageController extends Controller
             ->whereIn('id', $id_edu)
             ->with(['posts'])
             ->orderBy('order', 'asc')
-            ->get();
+            ->get()
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(6)
+                    ->get();
+                return $cat;
+            });
         }
 
         $id_leauge = !empty($fcSystem['thm360_3']) ? json_decode($fcSystem['thm360_3'], true) : 0;

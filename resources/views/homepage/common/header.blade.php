@@ -13,8 +13,45 @@ if( isset(Auth::guard('customer')->user()->id) ){
 }
 ?>
 
-<header id="header" class="site-header my-[30px]">
-    <div class="main-menu">
+<header id="header" class="site-header">
+    <div class="4xl:px-[200px] 4xl:py-[20px] py-[20px] bg-white">
+        <div class="flex justify-between">
+            <div class="flex items-center">
+                <img src="/upload/images/logo/logo-thm.png" class="w-[165px]" alt="">
+                <h3 class="4xl:ml-[120px] text-[#6a0f11] 4xl:text-f31">Cổng thông tin nội bộ của <b>Tập đoàn Tân Hoàng Minh</b></h3>
+            </div>
+            <div class="flex items-center">
+                <form action="">
+                    <div class="flex gap-[20px]">
+                        <div>
+                            <div class="flex">
+                                <span class="bg-[#999999] w-[45px] h-[45px] round-[5px] flex justify-center items-center">
+                                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="10" r="3" stroke="#222222" stroke-linecap="round"></circle> <circle cx="12" cy="12" r="9" stroke="#222222"></circle> <path d="M18 18.7059C17.6461 17.6427 16.8662 16.7033 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.13375 16.7033 6.35391 17.6427 6 18.7059" stroke="#222222" stroke-linecap="round"></path> </g></svg>
+                                </span>
+                                <input type="text" class="h-[45px] w-[205px] border round-[5px] border-[#e5e5e5] text-[#969696] outline-none px-2" placeholder="User Name">
+                            </div>
+                            <div class="inline-block mt-2">
+                                <input type="checkbox"> <label for="">Ghi nhớ tài khoản</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex">
+                                <span class="bg-[#999999] w-[45px] h-[45px] round-[5px] flex justify-center items-center">
+                                    <svg width="30px" height="30px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="icomoon-ignore"> </g> <path d="M16 3.205c-7.067 0-12.795 5.728-12.795 12.795s5.728 12.795 12.795 12.795 12.795-5.728 12.795-12.795c0-7.067-5.728-12.795-12.795-12.795zM16 4.271c6.467 0 11.729 5.261 11.729 11.729 0 2.845-1.019 5.457-2.711 7.49-1.169-0.488-3.93-1.446-5.638-1.951-0.146-0.046-0.169-0.053-0.169-0.66 0-0.501 0.206-1.005 0.407-1.432 0.218-0.464 0.476-1.244 0.569-1.944 0.259-0.301 0.612-0.895 0.839-2.026 0.199-0.997 0.106-1.36-0.026-1.7-0.014-0.036-0.028-0.071-0.039-0.107-0.050-0.234 0.019-1.448 0.189-2.391 0.118-0.647-0.030-2.022-0.921-3.159-0.562-0.719-1.638-1.601-3.603-1.724l-1.078 0.001c-1.932 0.122-3.008 1.004-3.57 1.723-0.89 1.137-1.038 2.513-0.92 3.159 0.172 0.943 0.239 2.157 0.191 2.387-0.010 0.040-0.025 0.075-0.040 0.111-0.131 0.341-0.225 0.703-0.025 1.7 0.226 1.131 0.579 1.725 0.839 2.026 0.092 0.7 0.35 1.48 0.569 1.944 0.159 0.339 0.234 0.801 0.234 1.454 0 0.607-0.023 0.614-0.159 0.657-1.767 0.522-4.579 1.538-5.628 1.997-1.725-2.042-2.768-4.679-2.768-7.555 0-6.467 5.261-11.729 11.729-11.729zM7.811 24.386c1.201-0.49 3.594-1.344 5.167-1.808 0.914-0.288 0.914-1.058 0.914-1.677 0-0.513-0.035-1.269-0.335-1.908-0.206-0.438-0.442-1.189-0.494-1.776-0.011-0.137-0.076-0.265-0.18-0.355-0.151-0.132-0.458-0.616-0.654-1.593-0.155-0.773-0.089-0.942-0.026-1.106 0.027-0.070 0.053-0.139 0.074-0.216 0.128-0.468-0.015-2.005-0.17-2.858-0.068-0.371 0.018-1.424 0.711-2.311 0.622-0.795 1.563-1.238 2.764-1.315l1.011-0.001c1.233 0.078 2.174 0.521 2.797 1.316 0.694 0.887 0.778 1.94 0.71 2.312-0.154 0.852-0.298 2.39-0.17 2.857 0.022 0.078 0.047 0.147 0.074 0.217 0.064 0.163 0.129 0.333-0.025 1.106-0.196 0.977-0.504 1.461-0.655 1.593-0.103 0.091-0.168 0.218-0.18 0.355-0.051 0.588-0.286 1.338-0.492 1.776-0.236 0.502-0.508 1.171-0.508 1.886 0 0.619 0 1.389 0.924 1.68 1.505 0.445 3.91 1.271 5.18 1.77-2.121 2.1-5.035 3.4-8.248 3.4-3.183 0-6.073-1.277-8.188-3.342z" fill="#ffffff"> </path> </g></svg>                                
+                                </span>
+                                <input type="text" class="h-[45px] w-[205px] border round-[5px] border-[#e5e5e5] text-[#969696] outline-none px-2" placeholder="Mật khẩu">
+                            </div>
+                            <a href="" class="text-[#2f51ad] inline-block mt-2">Đổi mật khẩu</a>
+                        </div>
+                        <div>
+                            <button class="w-[150px] h-[45px] rounded-[5px] bg-[#999999] text-white flex justify-center items-center text-22 uppercase">Đăng nhập</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="main-menu hidden">
         <div class="menu-box">
             <div class="container">
                 <div class="mobile" style="display:none">
@@ -64,6 +101,46 @@ if( isset(Auth::guard('customer')->user()->id) ){
             </div>
         </div>
     </div>
+    <div>
+        <img src="upload/images/logo/Anh CBNV 30-4_ 4.jpg" class="h-[690px] w-full object-cover" alt="">
+    </div>
+    <div class="bg-[#bf8d35] py-[10px]">
+        <div class="container">
+            <div class="">
+                
+                <ul class="flex text-white text-f32 justify-between items-center">
+                    <li>
+                        <a href="">
+                            <img src="upload/images/logo/logo-menu.png" class="h-[60px] w-auto" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">Về chúng ta</a>
+                    </li>
+                    <li>
+                        <a href="">Bất động sản</a>
+                    </li>
+                    <li>
+                        <a href="">Trách nhiệm xã hội</a>
+                    </li>
+                    <li>
+                        <a href="">THM 360</a>
+                    </li>
+                    <li>
+                        <a href="">THM Talk</a>
+                    </li>
+                    <li>
+                        <a href="">Multimedia</a>
+                    </li>
+                    <li>
+                        <a href=""><img src="{{ asset('frontend/images/search.png') }}" alt=""></a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    
 </header>
 
 

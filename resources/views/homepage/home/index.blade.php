@@ -1,12 +1,11 @@
 @extends('homepage.layout.home')
 @section('content')
     <div class="main-page">
-        
+
         @php
             $slide = getSlideHome($fcSystem['homepage_slide']);
-            // dd($slide);
         @endphp
-        {{-- Block 1 --}}
+        {{-- Block Slide --}}
         @if( $slide && $slide->posts->isNotEmpty() )
             <section class="section-home lg:pb-[80px] md:pb-[60px] pb-[40px]">
                 <div class="container">
@@ -20,7 +19,7 @@
                                     $comment = getDataJson($post->postmetas, 'config_colums_json_slides_top_slide');
                                 @endphp
                                 <div class="swiper-slide">
-                                    <div>
+                                    <div class="hidden">
                                         <img src="{{ asset($post->image) }}" class="w-full 3lx:h-[350px] 2xl:h-[240px] lg:h-[260px] object-cover rounded-[30px]" alt="">
                                     </div>
                     
@@ -115,7 +114,7 @@
             </section>
         @endif
 
-        {{-- Block 2 --}}
+        {{-- Block TH360 --}}
         @php
             $block2_info = getDataJson($page->fields, 'config_colums_json_home_thm_360_info');
             $block2_images = getDataJson($page->fields, 'config_colums_json_home_thm_360_images');
@@ -124,17 +123,17 @@
             <div class="container">
                 @if( isset($block2_info) )
                     @foreach ($block2_info->image as $k => $image )
-                        <div class="text-center wow fadeInUp">
+                        <div class="wow fadeInUp">
                             <img src="{{ asset($image) }}" class="inline-block 3xl:h-[77px] xl:h-[53px] sm:h-[45px] h-[35px] w-auto object-contain" alt="">
-                            <h3 class="font-misslegate 3xl:text-[96px] 3xl:h-[86px] 3xl:leading-[40px] xl:h-[60px] xl:leading-[31px] xl:text-[76px] 3xl:mt-[28px] xl:mt-[20px] sm:h-[50px] sm:leading-[30px] sm:mt-[15px] sm:text-[68px] text-[50px] h-[38px] leading-[21px] mt-3">{{ $block2_info->title[$k] }}</h3>
-                            <div class="3xl:text-f30 xl:text-f22 font-bold 3xl:mt-[21px] xl:mt-[15px] mt-[15px] sm:text-[19px] text-f14 text-color_primary">{{ $block2_info->desc[$k] }}</div>
+                            <h3 class="font-misslegate 4xl:pl-[140px] 3xl:text-[96px] 3xl:h-[86px] 3xl:leading-[40px] xl:h-[60px] xl:leading-[31px] xl:text-[76px] 3xl:mt-[28px] xl:mt-[20px] sm:h-[50px] sm:leading-[30px] sm:mt-[15px] sm:text-[68px] text-[50px] h-[38px] leading-[21px] mt-3">{{ $block2_info->title[$k] }}</h3>
+                            <div class="3xl:text-f30  4xl:pl-[140px] xl:text-f22 3xl:mt-[21px] xl:mt-[15px] mt-[15px] sm:text-[19px] text-f14 text-color_primary">{{ $block2_info->desc[$k] }}</div>
                         </div>
                     @endforeach
                 @endif
 
                 @if( isset($block2_images) )
                     {{-- PC --}}
-                    <div class="xl:flex hidden items-center justify-center gap-[25px] mt-[35px]">
+                    <div class="xl:flex_ hidden items-center justify-center gap-[25px] mt-[35px]">
                         @foreach ($block2_images->image as $k => $image)
                             @if($k==0)
                                 <div class="hover-img rounded-[30px] 3xl:w-[275px] 3xl:h-[337px] xl:w-[199px] xl:h-[238px] text-center relative after:content[''] after:bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.5)_84.47%)] after:absolute after:w-full after:h-full after:top-0 after:left-0 after:rounded-[30px] wow fadeInUp" data-wow-delay="0.6s">
@@ -165,8 +164,8 @@
                     </div>
 
                     {{-- Tablet/Mobile --}}
-                    <div class="xl:hidden block mt-[35px]">
-                        <div class="swiper-block-2 swiper-container wow fadeInUp">
+                    <div class="mt-[85px]">
+                        <div class="swiper-block-5 swiper-container wow fadeInUp">
                             <div class="swiper-wrapper">
                                 @foreach ($block2_images->image as $k => $image)
                                     <div class="swiper-slide">
@@ -182,7 +181,7 @@
             </div>
         </section>
 
-        {{-- Block 3 --}}
+        {{-- Block Văn hóa --}}
         @if(isset($isVanHoa) && count($isVanHoa) > 0)
             @foreach ($isVanHoa as $cat)
                 @if( isset($cat->posts) )
@@ -226,7 +225,7 @@
             @endforeach
         @endif
 
-        {{-- Block 4 --}}
+        {{-- Block Vì VN --}}
         @php
             $block3_info = getDataJson($page->fields, 'config_colums_json_home_cout_project');
         @endphp
@@ -266,7 +265,7 @@
             @endforeach
         @endif
 
-        {{-- Block 5 --}}
+        {{-- Block Multimedia --}}
         @if( isset($homeMedia) && count($homeMedia->children) )
             <section class="mt-[110px]">
                 <div class="container">
@@ -277,7 +276,7 @@
                                 <div class="2xl:mt-[35px] xl:mt-[40px] mt-[30px]">
                                     <ul class="tabBlock-tabs xl:text-left text-center">
                                         @foreach( $homeMedia->children as $k => $cat )
-                                            <li class="inline-block"><a href="javascript:void(0)" data-tab="data-tab-{{ $k }}" class="tabBlock-tab border @if( $k ==0 ) border-color_primary bg-color_primary text-white @else border-black @endif rounded-[115px] text-f18 mr-[20px]  py-[3px] px-[14px] inline-block hover:border-color_primary duration-300">{{ $cat->title }}</a></li>
+                                            <li class="inline-block"><a href="javascript:void(0)" data-tab="data-tab-{{ $k }}" class="tabBlock-tab border @if( $k ==0 ) border-color_primary bg-color_primary text-white @else border-black @endif rounded-[115px] text-f18 mr-[20px]  py-[3px] px-[14px] inline-block hover:bg-color_primary hover:text-white hover:border-color_primary duration-300">{{ $cat->title }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -307,7 +306,7 @@
                                                                 {{$post->title}}
                                                             </h4>
                                                         </div>
-                                                        <a href="{{$post->video_iframe}}" class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+                                                        <a href="{{$post->video_iframe}}" data-fancybox class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
                                                             <img src="/upload/images/logo/icon-play.png" alt="">
                                                         </a>
                                                     </div>
@@ -326,9 +325,7 @@
             </section>
         @endif
 
-        
-
-        {{-- Block 6 --}}
+        {{-- Block BDS --}}
         @if(isset($homeBDS) && count($homeBDS->children) > 0)
             <section class="mt-[85px]">
                 <div class="container tabBlock">
@@ -370,8 +367,6 @@
                                         @endforeach
                                     @endif
                                 </div>
-
-                                    
                             </div>
                         @endforeach
                     </div>
@@ -386,6 +381,14 @@
     </div>
 @endsection
 @push('javascript')
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+         $(document).ready(function() {
+            Fancybox.bind("[data-fancybox]", {
+                // Your Fancybox options here
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('.tabBlock-tab').click(function() {
@@ -397,7 +400,8 @@
                 // 2. Hiện tab theo id click với hiệu ứng fade
                 $('#' + idTab).fadeIn(600);
 
-                console.log($('#' + idTab));
+                $(this).parents('.tabBlock-tabs').find('a').removeClass('bg-color_primary text-white border-color_primary').addClass('border-black text-black')
+                $(this).addClass('bg-color_primary text-white border-color_primary');
             });
         });
     </script>
@@ -423,6 +427,29 @@
                 },
                 slidesPerView: 1
             });
+
+            const swiper5 = new Swiper(".swiper-block-5", {
+                slidesPerView: 5,
+                centeredSlides: true,
+                loop: true,
+                on: {
+                    slideChangeTransitionEnd: function () {
+                    // reset class
+                    this.slides.forEach(slide => {
+                        slide.classList.remove('prev-2', 'prev-1', 'next-1', 'next-2');
+                    });
+
+                    const active = this.activeIndex;
+                    const slides = this.slides;
+
+                    slides[active - 2]?.classList.add('prev-2');
+                    slides[active - 1]?.classList.add('prev-1');
+                    slides[active + 1]?.classList.add('next-1');
+                    slides[active + 2]?.classList.add('next-2');
+                    }
+                }
+            }); 
+
             
             if( $(window).width() < 1025 ){
                 var swiperBlock2 = new Swiper(".swiper-block-2.swiper-container", {
@@ -453,4 +480,35 @@
             }
         })
     </script>
+@endpush
+
+@push('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.min.css">
+    <style>
+
+
+        .swiper-block-5 .swiper-slide {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: scale(0.4); /* mặc định nhỏ */
+        opacity: 0.5;
+        }
+
+        .swiper-block-5 .swiper-slide-active {
+        transform: scale(1);   /* giữa to nhất */
+        opacity: 1;
+        }
+
+        .swiper-block-5 .swiper-slide.prev-1,
+        .swiper-block-5 .swiper-slide.next-1 {
+        transform: scale(0.6); /* kế bên */
+        opacity: 0.8;
+        }
+
+        .swiper-block-5 .swiper-slide.prev-2,
+        .swiper-block-5 .swiper-slide.next-2 {
+        transform: scale(0.4); /* xa hơn */
+        opacity: 0.6;
+        }
+
+    </style>
 @endpush

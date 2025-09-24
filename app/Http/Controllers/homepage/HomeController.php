@@ -18,6 +18,8 @@ use App\Components\Nestedsetbie;
 use App\Components\Helper;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
+
 
 use App\Events\AloneEvent;
 
@@ -38,63 +40,81 @@ class HomeController extends Controller
     public function index()
     {
         $fcSystem = $this->system->fcSystem();
-        //$slideHome = getSlider('home-slider');
-        //$slideFeedback = getSlider('slide-feedback');
-        //$videos = getSlider('video');
 
-        $expertHome = Expert::where(['alanguage' => config('app.locale'), 'publish' => 0])
-        ->with(['fields'])
-        ->orderBy('order', 'asc')
-        ->orderBy('id', 'desc')
-        ->limit(100)
-        ->with(['attributes'])
-        ->get();
-
-        //dd($expertHome);
-
-        $isVanHoa = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
-            ->where(['alanguage' => config('app.locale'), 'publish' => 0, 'highlight' => 1])
-            ->with(['posts'])
+        $id_vh = !empty($fcSystem['homepage_vanhoa']) ? json_decode($fcSystem['homepage_vanhoa'], true) : 0;
+        $isVanHoa = null;
+        if( $id_vh ){
+            $isVanHoa = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_vh)
             ->orderBy('order', 'asc')
-            ->get();
-
-        $homeNews = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'view_home')
-            ->where(['alanguage' => config('app.locale'), 'publish' => 0, 'ishome' => 1])
-            ->with(['posts'])
-            ->with(['children' => function($query){
-                $query->with('posts');
-            }])
-            ->orderBy('order', 'asc')
+            ->orderBy('id', 'desc')
             ->get()
-            ->map(function($query) {
-                $query->setRelation('posts', $query->posts->take(6));
-                return $query;
-        });
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(5)
+                    ->get();
+                return $cat;
+            });
+        }
 
         $homeMedia = \App\Models\CategoryMedia::select('id', 'title', 'slug')
-            ->where(['alanguage' => config('app.locale'), 'publish' => 0, 'parentid' => 0, 'ishome' => 1])
-            ->with(['children' => function($query){
-                $query->with('fields', 'listMedia');
-            }])
+            ->where([
+                'alanguage' => config('app.locale'),
+                'publish'   => 0,
+                'parentid'  => 0,
+                'ishome'    => 1,
+            ])
             ->orderBy('order', 'asc')
             ->first();
+        if ($homeMedia) {
+            $homeMedia->children = $homeMedia->children()
+                ->with('fields')
+                ->get()
+                ->map(function($child) {
+                    $child->listMedia = $child->listMedia()
+                        ->limit(3)
+                        ->get();
+                    return $child;
+                });
+        }
 
         $homeBDS = \App\Models\CategoryArticle::select('id', 'title', 'slug')
-            ->where(['alanguage' => config('app.locale'), 'publish' => 0, 'parentid' => 0, 'isfooter' => 1])
-            ->with(['children' => function($query){
-                $query->with('postsDBS');
-            }])
+            ->where([
+                'alanguage' => config('app.locale'),
+                'publish'   => 0,
+                'parentid'  => 0,
+                'isfooter'  => 1,
+            ])
             ->orderBy('order', 'asc')
             ->first();
 
+        if ($homeBDS) {
+            $homeBDS->children = $homeBDS->children()
+                ->get()
+                ->map(function($child) {
+                    // Lấy postsDBS kèm limit 4 bài (ví dụ)
+                    $child->postsDBS = $child->postsDBS()
+                        ->orderBy('order', 'asc')
+                        ->orderBy('id', 'desc')
+                        ->limit(6)
+                        ->get();
+                    return $child;
+                });
+        }
 
-            
-        $homeService = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'description')
-            ->where(['alanguage' => config('app.locale'), 'publish' => 0, 'isservice' => 1])
-            ->with(['posts' => function ($query) {
-                $query->limit(6)->get();
-            }])
-            ->get();
+
+        // dd($homeBDS);
+
+        // $homeBDS = \App\Models\CategoryArticle::select('id', 'title', 'slug')
+        //     ->where(['alanguage' => config('app.locale'), 'publish' => 0, 'parentid' => 0, 'isfooter' => 1])
+        //     ->with(['children' => function($query){
+        //         $query->with('postsDBS');
+        //     }])
+        //     ->orderBy('order', 'asc')
+        //     ->first();
 
 
         //page: HOME
@@ -110,7 +130,7 @@ class HomeController extends Controller
         $seo['meta_title'] = !empty($page['meta_title']) ? $page['meta_title'] : $page['title'];
         $seo['meta_description'] = !empty($page['meta_description']) ? $page['meta_description'] : '';
         $seo['meta_image'] = !empty($page['image']) ? url($page['image']) : '';
-        return view('homepage.home.index', compact('page', 'seo', 'fcSystem', 'homeNews', 'isVanHoa', 'homeMedia', 'homeBDS'));
+        return view('homepage.home.index', compact('page', 'seo', 'fcSystem', 'isVanHoa', 'homeMedia', 'homeBDS'));
     }
 
     public function api()

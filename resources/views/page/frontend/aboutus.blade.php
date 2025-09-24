@@ -3,7 +3,7 @@
 
 <div class="main-page">
 
-    {{-- Block 1 --}}
+    {{-- Block Tập đoàn --}}
     @php
         $block1 = getDataJson($page->fields, 'config_colums_json_about_info');
     @endphp
@@ -27,14 +27,14 @@
                             </div>
                             <h3 class="3xl:text-[44px] xl:text-[40px] lg:text-f29 text-f22 text-color_primary font-bold lg:mt-[-45px] mt-[10px]">{{$block1->last_title[$k]}}</h3>
                         </div>
-                        <div class="text-justify text-[#2B2B2B] md:text-f20 text-f18 leading-[27px] 3xl:mt-0 mt-[20px] wow fadeInRight" data-wow-delay="0.2s">{!! $block1->desc[$k] !!}</div>
+                        <div class="text-justify text-[#2B2B2B] md:text-f20 text-f18 leading-[28px] 3xl:mt-0 mt-[20px] wow fadeInRight" data-wow-delay="0.2s">{!! $block1->desc[$k] !!}</div>
                     </div>
                 @endforeach
             @endif
         </div>
     </div>
 
-    {{-- Block 2 --}}
+    {{-- Block Danh sách tab --}}
     @php
         $tamnhin = getSlider('tam-nhin');
         $benvung_tieude = getDataJson($page->fields, 'config_colums_json_about_giatri');
@@ -51,32 +51,32 @@
             <div class="py-[30px]">
                 <ul class="flex justify-between font-normal 3xl:text-f26 xl:text-f18 whitespace-nowrap gap-[15px] overflow-y-auto md:text-f20 text-f17">
                     <li><a href="javascript:void(0)" class="px-[20px] py-[20px] bg-color_primary text-white border-color_primary rounded-[165px] inline-flex">{{ (isset($tamnhin)) ? $tamnhin->title : 'TẦM NHÌN & SỨ MỆNH' }}</a></li>
-                    <li><a href="javascript:void(0)" class="px-[20px] py-[20px] border border-black rounded-[165px] inline-flex">{{$title2}}</a></li>
-                    <li><a href="javascript:void(0)" class="px-[20px] py-[20px] border border-black rounded-[165px] inline-flex">{{$title3}}</a></li>
-                    <li><a href="javascript:void(0)" class="px-[20px] py-[20px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ LÃNH ĐẠO</a></li>
-                    <li><a href="javascript:void(0)" class="px-[20px] py-[20px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ CÁN BỘ QUẢN LÝ</a></li>
+                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title2}}</a></li>
+                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title3}}</a></li>
+                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ LÃNH ĐẠO</a></li>
+                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ CÁN BỘ QUẢN LÝ</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
-    {{-- Block 3 --}}
+    {{-- Block Tầm nhìn sứ mệnh --}}
     <div class="mt-[60px]">
         <div class="container">
-            <div class="grid md:grid-cols-2 grid-cols-1 gap-[15px]">
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-[15px]">
                 @if(isset($tamnhin))
                     @foreach($tamnhin->slides as $k => $slide)
-                        <div class="relative hover-tamnhin lg:h-[585px] h-[430px] overflow-hidden rounded-[30px] flex_ justify-center_ bg-[linear-gradient(234.46deg,rgba(195,142,43,0)_48.58%,rgba(93,68,21,0.55)_77.96%),url('/frontend/images/bg-tam-nhin-su-menh-crop.jpg')] bg-cover bg-center wow fadeInUp" data-wow-delay="{{($k+1)*0.2}}s">
-                            <div class="flex justify-center flex-col h-full">
+                        <div class="relative hover-tamnhin lg:h-[585px] md:h-[430px] h-full overflow-hidden rounded-[30px] flex_ justify-center_ bg-[linear-gradient(234.46deg,rgba(195,142,43,0)_48.58%,rgba(93,68,21,0.55)_77.96%),url('/frontend/images/bg-tam-nhin-su-menh-crop.jpg')] bg-cover bg-center wow fadeInUp" data-wow-delay="{{($k+1)*0.2}}s">
+                            <div class="flex items-center justify-center flex-col h-full 3xl:gap-y-[70px]">
                                 <div class="text-center"><img src="{{asset($slide->src)}}" class="lg:h-[130px] h-[95px] w-auto inline-block" alt=""></div>
-                                <h3 class="3xl:text-[120px] xl:text-[50px] md:text-f40 text-f27 3xl:mt-0 mt-[30px] font-semibold text-white text-center">{{$slide->title}}</h3>
+                                <h3 class="3xl:text-[120px] xl:text-[50px] md:text-f40 text-f30 3xl:mt-0 mt-[30px] font-semibold text-white text-center">{{$slide->title}}</h3>
                             </div>
                             <div class="hover flex flex-col justify-between h-full p-[40px] text-white">
-                                <div class="flex justify-between">
-                                    <h3 class="3xl:text-[64px] font-bold">{{$slide->title}}</h3>
+                                <div class="flex items-center justify-between">
+                                    <h3 class="3xl:text-[64px] 2xl:text-f40 lg:text-f37 md:text-f35 text-f30 font-bold">{{$slide->title}}</h3>
                                     <img src="{{asset($slide->src)}}" class="h-[90px]" alt="">
                                 </div>
-                                <div class="text-[36px]">{{ $slide->description }}</div>
+                                <div class="3xl:text-[36px] 3xl:leading-[45px] xl:leading-[35px] leading-[30px] xl:text-f24 text-f21">{{ $slide->description }}</div>
                             </div>
                         </div>
                     @endforeach
@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    {{-- Block 4 --}}
+    {{-- Block Giá trị cốt lõi --}}
     @if(isset($benvung_data))
         <div class="3xl:mt-[300px] xl:mt-[150px] mt-[80px]">
             <div class="container">
@@ -93,11 +93,11 @@
                     <div class="col-span-5">
                         <h3 class="3xl:text-[64px] xl:text-[60px] lg:text-f40 text-f35 md:text-f40 font-bold">{{$title2}}</h3>
                     </div>
-                    <div class="col-span-7 3xl:text-f30 xl:text-f24 text-f20 font-medium leading-[32px] lg:mt-0 mt-[30px] flex items-center text-[#2B2B2B]">
+                    <div class="col-span-7 3xl:text-f30 xl:text-f24 text-f20 font-medium 3xl:leading-[40px] leading-[32px] lg:mt-0 mt-[30px] flex items-center text-[#2B2B2B]">
                         {!!$desc2!!}
                     </div>
                 </div>
-                <div class="lg:grid lg:grid-cols-5 gap-[15px] 3xl:mt-[35px] xl:mt-[50px] mt-[40px]">
+                <div class="lg:grid xl:grid-cols-5 lg:grid-cols-2 gap-[15px] 3xl:mt-[35px] xl:mt-[50px] mt-[40px]">
                     @foreach($benvung_data->title as $k => $title)
                         <div class="col-span-1 relative lg:mb-0 mb-[20px] rounded-[30px] hover-zoom overflow-hidden after:content-[''] after:bg-[linear-gradient(180deg,rgba(0,0,0,0)_49.86%,rgba(0,0,0,0.8)_89.3%)] after:absolute after:left-0 after:top-0 after:w-full after:h-full wow fadeInUp" data-wow-delay="{{($k+1)*0.1}}s">
                             <img src="{{asset($benvung_data->image[$k])}}" class="3xl:h-[520px] xl:h-[330px] md:h-[400px] h-[250px] w-full object-cover" alt="">
@@ -132,7 +132,7 @@
             </div>
             @endif
 
-            <div class="relative mt-[135px]">
+            <div class="relative mt-[135px] wow fadeInUp">
                 <div class="absolute bottom-0 left-0 hidden lg:block">
                     <svg width="637" height="535" viewBox="0 0 637 535" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_877_1407" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="151" width="637" height="384">
@@ -218,7 +218,7 @@
                     </div>
                 @endif
 
-                <div class="text-center relative z-10">
+                <div class="text-center relative z-10 wow fadeInUp">
                     <div class="xl:w-[795px] w-full inline-block">
                         <div class="font-misslegate text-[70px]">{{ $fcSystem['title_1'] }}</div>
                         <div class="uppercase 3xl:text-[50px] xl:text-[40px] lg:text-f30 text-f35 text-color_primary font-bold relative">{{ $fcSystem['title_2'] }}</div>
@@ -246,7 +246,7 @@
     @endphp
     <div class="mt-[115px]">
         <div class="container">
-            <div class="text-center mb-[30px]">
+            <div class="text-center mb-[30px] wow fadeInUp">
                 <div class="font-misslegate text-[70px]">Đội ngũ</div>
                 <div class="uppercase 3xl:text-[50px] xl:text-[40px] lg:text-f30 text-f35 text-color_primary font-bold relative">ban lãnh đạo</div>
             </div>
@@ -270,7 +270,7 @@
             @endif
 
             @if ($blockD2 && $blockD2->slides->isNotEmpty())
-                <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[30px] mt-5 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="grid lg:grid-cols-4 lg:grid-cols-2 grid-cols-1 gap-[30px] mt-5 wow fadeInUp" data-wow-delay="0.2s">
                     @foreach( $blockD2->slides as $slide )
                         <div class="h-[235px] relative overflow-hidden rounded-[30px] after:content-[''] after:bg-[linear-gradient(180deg,rgba(0,0,0,0)_49.86%,rgba(0,0,0,0.8)_89.3%)] after:absolute after:left-0 after:top-0 after:w-full after:h-full">
                             <img src="{{ ($slide->src) }}" class="h-full object-cover rounded-[24px] w-full text-f30 font-semibold" alt="">
@@ -284,8 +284,8 @@
                 </div>
             @endif
 
-            <div class="text-center">
-                <a href="" class="inline-block mt-[45px] hover:bg-color_primary hover:text-white duration-300 font-bold border-color_primary border-[3px] text-color_primary text-f25 px-[40px] py-[20px] rounded-[60px]">Xem thêm</a>
+            <div class="text-center wow fadeInUp">
+                <a href="{{ showField($page->fields, 'config_colums_input_about_link_customer') }}" class="inline-block mt-[45px] hover:bg-color_primary hover:text-white duration-300 font-bold border-color_primary border-[3px] text-color_primary text-f25 px-[40px] py-[20px] rounded-[60px]">Xem thêm</a>
             </div>
         </div>
     </div>
