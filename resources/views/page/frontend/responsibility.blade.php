@@ -1,7 +1,7 @@
 @extends('homepage.layout.home')
 @section('content')
 
-<div class="main-page">
+<div class="main-page page-responsibility">
 
     @php
         $block1 = getDataJson($page->fields, 'config_colums_json_trachnhiem_title');
@@ -80,8 +80,8 @@
     @if(isset($isNews))
         <section class="mt-[85px]">
             <div class="container tabBlock">
-                <div class="xl:flex justify-between items-center lg:text-left text-center mb-[45px] wow fadeInUp">
-                    <h3 class="font-bold 3xl:text-[64px] 2xl:text-[56px] sm:text-[54px] text-[36px] lg:mt-0 mt-[40px]">{{ $isNews->title }}</h3>
+                <div class="xl:flex justify-between items-center lg:text-left text-center 3xl:mb-[45px] mb-[30px] wow fadeInUp">
+                    <h3 class="font-bold 4xl:text-[64px] 3xl:text-[45px] xl:text-[40px] text-[36px] lg:mt-0 mt-[40px]">{{ $isNews->title }}</h3>
                 </div>
                 <div class="md:mt-0 mt-[40px]">
                     <div class="tabBlock-pane">
@@ -90,7 +90,7 @@
                             @foreach( $isNews->posts as $k => $post )
                                 <div class="@if( $k==0 ) 2xl:col-span-6 @elseif($k>0 && $k<3) 2xl:col-span-3 @else 2xl:col-span-4  @endif lg:col-span-4 sm:col-span-6 col-span-12 relative rounded-[30px] overflow-hidden">
                                     <div class="relative after:content[''] after:bg-[linear-gradient(0deg,#222222_9%,rgba(34,34,34,0.169326)_39.18%,rgba(34,34,34,0.73)_100.01%)] after:absolute after:w-full after:h-full after:top-0 after:left-0">
-                                        <img src="{{asset($post->image)}}" class="@if( $k<3 ) h-[360px]  @else h-[255px]  @endif w-full object-cover object-bottom" alt="">
+                                        <img src="{{asset($post->image)}}" class="@if( $k<3 ) 3xl:h-[360px]  @else 3xl:h-[255px]  @endif xl:h-[320px] w-full object-cover object-bottom" alt="">
                                     </div>
                                     <ul class="absolute inline-flex left-[22px] z-10 top-[27px]">
                                         <li class="border py-[3px] px-[12px] text-f16 text-white rounded-[100px] hover:bg-white hover:text-color_primary duration-300"><a href="{{route('routerURL', ['slug' => $isNews->slug])}}">{{$isNews->title}}</a></li>

@@ -8,8 +8,8 @@
     @endphp
     <div class="relative after:content[''] py-[60px] after:bg-[rgba(195,142,43,0.9)] after:absolute after:top-0 after:left-0 after:w-full after:h-full" style="background: url('upload/images/logo/bg-contact.png')">
         <div class="container">
-            <div class="xl:flex justify-center">
-                <div class="xl:w-[1255px] relative z-10">
+            <div class="">
+                <div class="relative z-10">
                     <h4 class="text-white text-f20 font-semibold">
                         <a href="{{ url('/') }}" class="flex items-center">
                             <img src="{{ asset('frontend/images/contact-arrow-left.svg') }}" class="h-[23px] w-[23px] mr-3" alt="">
@@ -17,9 +17,11 @@
                         </a>
                     </h4>
                     <div class="xl:flex gap-[30px] bg-white rounded-[30px] mt-[22px] p-[25px]">
-                        <div class="xl:w-[615px] w-full">
+                        <div class="flex-1 w-full">
                             <div class=" xl:text-left text-center">
-                                <img src="{{ asset($image) }}" class="xl:h-auto lg:h-[285px] object-contain inline-block" alt="">
+                                <div class="text-center">
+                                    <img src="{{ asset($image) }}" class="xl:h-auto lg:h-[285px] object-contain inline-block" alt="">
+                                </div>
                                 <div class="xl:mt-[135px] mt-8 xl:text-f20 text-f18 leading-[28px] text-[#4F4F4F]">
                                     {!! $page->description !!}
                                 </div>
@@ -35,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-1">
+                        <div class="4xl:w-[890px] 3xl:w-[650px]">
                             <h3 class="lg:text-[40px] text-f30 font-bold leading-[100%] text-center text-color_primary lg:mt-0 mt-8">{{ $page->title }}</h3>
                             <form action="" id="form-submit-contact" class="mt-[25px]">
                                 @csrf
@@ -47,12 +49,12 @@
                                     </div>
                                     <div class="xl:col-span-1 col-span-2">
                                         <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[8px] block">Email</label>
-                                        <input type="text" name="email" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
+                                        <input type="text" name="email" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] 4xl:w-[345px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
                                     </div>
                                     <div class="xl:col-span-1 col-span-2 xl:flex justify-end">
                                         <div>
                                             <label for="" class="text-f14 text-[rgba(102,102,102,1)] mb-[8px] block">Số điện thoại</label>
-                                            <input type="text" name="phone" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
+                                            <input type="text" name="phone" class="text-f14 outline-none px-3 h-[46px] rounded-[10px] 4xl:w-[345px] xl:w-[225px] w-full text-[rgba(102,102,102,1)] border border-[rgba(102,102,102,0.35)]" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-span-2">
@@ -131,10 +133,10 @@
 @push('css')
 <link rel="stylesheet" href="{{asset('frontend/css/app.css')}}"/>
 <style>
-    header,
+    /* header,
     footer{
         display: none!important;
-    }
+    } */
 </style>
 @endpush
 

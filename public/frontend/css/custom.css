@@ -385,6 +385,13 @@ span.swiper-pagination-bullet:hover:after {
     }
 }
 
+@media (max-width: 2880px) and (min-width: 2000px) {
+    .page-responsibility > div{
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+}
+
 .swiper-block-team .description {
     opacity: 0;
     transition: 0.4s;

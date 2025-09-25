@@ -179,20 +179,42 @@ class PageController extends Controller
             ->first();
 
         $id_bds = !empty($fcSystem['bds_0']) ? json_decode($fcSystem['bds_0'], true) : 0;
-        $bds = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
-        ->where(['alanguage' => config('app.locale'), 'publish' => 0])
-        ->whereIn('id', $id_bds)
-        ->with(['posts'])
-        ->orderBy('order', 'asc')
-        ->get();
+        $bds = null;
+        if( $id_bds ){
+            $bds = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_bds)
+            ->orderBy('order', 'asc')
+            ->orderBy('id', 'desc')
+            ->get()
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(4)
+                    ->get();
+                return $cat;
+            });
+        }
 
         $id_news = !empty($fcSystem['bds_1']) ? json_decode($fcSystem['bds_1'], true) : 0;
-        $news = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
-        ->where(['alanguage' => config('app.locale'), 'publish' => 0])
-        ->whereIn('id', $id_news)
-        ->with(['posts'])
-        ->orderBy('order', 'asc')
-        ->get();
+        $news = null;
+        if( $id_news ){
+            $news = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_news)
+            ->orderBy('order', 'asc')
+            ->orderBy('id', 'desc')
+            ->get()
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(4)
+                    ->get();
+                return $cat;
+            });
+        }
 
         $id_noibat = !empty($fcSystem['bds_2']) ? json_decode($fcSystem['bds_2'], true) : 0;
         $noibat = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
@@ -202,21 +224,43 @@ class PageController extends Controller
         ->orderBy('order', 'asc')
         ->get();
 
-        $id_kinhdoanh = !empty($fcSystem['bds_3']) ? json_decode($fcSystem['bds_3'], true) : 0;
-        $kinhdoanh = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
-        ->where(['alanguage' => config('app.locale'), 'publish' => 0])
-        ->whereIn('id', $id_kinhdoanh)
-        ->with(['posts'])
-        ->orderBy('order', 'asc')
-        ->get();
+        $id_kinhdoanh = !empty($fcSystem['bds_1']) ? json_decode($fcSystem['bds_1'], true) : 0;
+        $kinhdoanh = null;
+        if( $id_kinhdoanh ){
+            $kinhdoanh = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_kinhdoanh)
+            ->orderBy('order', 'asc')
+            ->orderBy('id', 'desc')
+            ->get()
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(5)
+                    ->get();
+                return $cat;
+            });
+        }
 
-        $id_cohoi = !empty($fcSystem['bds_4']) ? json_decode($fcSystem['bds_4'], true) : 0;
-        $cohoi = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
-        ->where(['alanguage' => config('app.locale'), 'publish' => 0])
-        ->whereIn('id', $id_cohoi)
-        ->with(['posts'])
-        ->orderBy('order', 'asc')
-        ->get();
+        $id_cohoi = !empty($fcSystem['bds_1']) ? json_decode($fcSystem['bds_1'], true) : 0;
+        $cohoi = null;
+        if( $id_cohoi ){
+            $cohoi = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_cohoi)
+            ->orderBy('order', 'asc')
+            ->orderBy('id', 'desc')
+            ->get()
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(5)
+                    ->get();
+                return $cat;
+            });
+        }
 
         $fields = [];
         if (!empty($page->fields)) {
@@ -291,12 +335,12 @@ class PageController extends Controller
             });
         }
 
-        $id_edu = !empty($fcSystem['thm360_2']) ? json_decode($fcSystem['thm360_2'], true) : 0;
-        $th_edu = null;
-        if( $id_edu ){
-            $th_edu = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+        $id_leauge = !empty($fcSystem['thm360_3']) ? json_decode($fcSystem['thm360_3'], true) : 0;
+        $th_leauge = null;
+        if( $id_leauge ){
+            $th_leauge = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
             ->where(['alanguage' => config('app.locale'), 'publish' => 0])
-            ->whereIn('id', $id_edu)
+            ->whereIn('id', $id_leauge)
             ->with(['posts'])
             ->orderBy('order', 'asc')
             ->get()
@@ -310,16 +354,6 @@ class PageController extends Controller
             });
         }
 
-        $id_leauge = !empty($fcSystem['thm360_3']) ? json_decode($fcSystem['thm360_3'], true) : 0;
-        $th_leauge = null;
-        if( $id_leauge ){
-            $th_leauge = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
-            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
-            ->whereIn('id', $id_leauge)
-            ->with(['posts'])
-            ->orderBy('order', 'asc')
-            ->get();
-        }
 
         $id_sport = !empty($fcSystem['thm360_4']) ? json_decode($fcSystem['thm360_4'], true) : 0;
         $th_sport = null;
@@ -338,7 +372,7 @@ class PageController extends Controller
         $seo['meta_description'] = !empty($page['meta_description']) ? $page['meta_description'] : '';
         $seo['meta_image'] = !empty($page['image']) ? url($page['image']) : '';
         
-        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_edu', 'th_leauge', 'th_sport', 'thmer', 'comment'));
+        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_leauge', 'th_sport', 'thmer', 'comment'));
     }
     
     public function scheduleSampling(Request $request)

@@ -9,8 +9,6 @@
     @endphp
     <div class="">
         <div class="container">
-            <img src="{{ asset($page->image) }}" class="w-full wow fadeInUp" alt="">
-
             @if(isset($block1))
                 @foreach($block1->title as $k => $title)
                     @php 
@@ -20,14 +18,14 @@
                     @endphp
                     <div class="xl:grid xl:grid-cols-2 lg:text-center justify-between 3xl:items-start xl:items-center mt-[55px] xl:gap-[50px] gap-[20px]">
                         <div class="wow fadeInLeft xl:text-left text-center" data-wow-delay="0.1s">
-                            <h3 class="3xl:text-[53px] xl:text-[40px] lg:text-[45px] md:text-f35 text-f30 font-bold">{{$title}}</h3>
+                            <h3 class="4xl:text-[53px] 3xl:text-[50px] xl:text-[40px] lg:text-[35px] md:text-f35 text-f30 font-bold">{{$title}}</h3>
                             <div class="lg:mt-[-55px] lg:ml-[60px]">
-                                <span class="font-misslegate text-color_primary xl:text-[86px] xl:leading-[155px] lg:text-[60px] lg:leading-[180px] text-[42px]">{{$fistTitle}}</span>
+                                <span class="font-misslegate text-color_primary 3xl:text-[86px] xl:text-[53px] xl:leading-[145px] 4xl:leading-[155px] lg:text-[60px] lg:leading-[180px] text-[42px]">{{$fistTitle}}</span>
                                 <span class="italic font-normal lg:text-f25 text-f20">{{$lastTitle}}</span>
                             </div>
-                            <h3 class="3xl:text-[44px] xl:text-[40px] lg:text-f29 text-f22 text-color_primary font-bold lg:mt-[-45px] mt-[10px]">{{$block1->last_title[$k]}}</h3>
+                            <h3 class="4xl:text-[44px] 3xl:text-[40px] xl:text-[30px] lg:text-f29 text-f22 text-color_primary font-bold lg:mt-[-45px] mt-[10px]">{{$block1->last_title[$k]}}</h3>
                         </div>
-                        <div class="text-justify text-[#2B2B2B] md:text-f20 text-f18 leading-[28px] 3xl:mt-0 mt-[20px] wow fadeInRight" data-wow-delay="0.2s">{!! $block1->desc[$k] !!}</div>
+                        <div class="text-justify 4xl:text-f25 4xl:leading-[30px] text-[#2B2B2B] md:text-f20 text-f18 leading-[28px] 3xl:mt-0 mt-[20px] wow fadeInRight" data-wow-delay="0.2s">{!! $block1->desc[$k] !!}</div>
                     </div>
                 @endforeach
             @endif
@@ -49,12 +47,12 @@
     <div class="bg-[#F7E8D0] mt-[100px] wow fadeInUp">
         <div class="container">
             <div class="py-[30px]">
-                <ul class="flex justify-between font-normal 3xl:text-f26 xl:text-f18 whitespace-nowrap gap-[15px] overflow-y-auto md:text-f20 text-f17">
+                <ul class="flex justify-between font-normal 4xl:text-f26 3xl:text-f19 xl:text-f17 whitespace-nowrap gap-[15px] overflow-y-auto md:text-f20 text-f17">
                     <li><a href="javascript:void(0)" class="px-[20px] py-[20px] bg-color_primary text-white border-color_primary rounded-[165px] inline-flex">{{ (isset($tamnhin)) ? $tamnhin->title : 'TẦM NHÌN & SỨ MỆNH' }}</a></li>
-                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title2}}</a></li>
-                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title3}}</a></li>
-                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ LÃNH ĐẠO</a></li>
-                    <li><a href="javascript:void(0)" class="lg:px-[20px] lg:py-[20px] px-[20px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ CÁN BỘ QUẢN LÝ</a></li>
+                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title2}}</a></li>
+                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title3}}</a></li>
+                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ LÃNH ĐẠO</a></li>
+                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ CÁN BỘ QUẢN LÝ</a></li>
                 </ul>
             </div>
         </div>
@@ -69,14 +67,14 @@
                         <div class="relative hover-tamnhin lg:h-[585px] md:h-[430px] h-full overflow-hidden rounded-[30px] flex_ justify-center_ bg-[linear-gradient(234.46deg,rgba(195,142,43,0)_48.58%,rgba(93,68,21,0.55)_77.96%),url('/frontend/images/bg-tam-nhin-su-menh-crop.jpg')] bg-cover bg-center wow fadeInUp" data-wow-delay="{{($k+1)*0.2}}s">
                             <div class="flex items-center justify-center flex-col h-full 3xl:gap-y-[70px]">
                                 <div class="text-center"><img src="{{asset($slide->src)}}" class="lg:h-[130px] h-[95px] w-auto inline-block" alt=""></div>
-                                <h3 class="3xl:text-[120px] xl:text-[50px] md:text-f40 text-f30 3xl:mt-0 mt-[30px] font-semibold text-white text-center">{{$slide->title}}</h3>
+                                <h3 class="4xl:text-[75px] 3xl:text-[55px] xl:text-[50px] md:text-f40 text-f30 3xl:mt-0 mt-[30px] font-semibold text-white text-center">{{$slide->title}}</h3>
                             </div>
                             <div class="hover flex flex-col justify-between h-full p-[40px] text-white">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="3xl:text-[64px] 2xl:text-f40 lg:text-f37 md:text-f35 text-f30 font-bold">{{$slide->title}}</h3>
+                                    <h3 class="4xl:text-[64px] 3xl:text-[45px] 2xl:text-f40 lg:text-f37 md:text-f35 text-f30 font-bold">{{$slide->title}}</h3>
                                     <img src="{{asset($slide->src)}}" class="h-[90px]" alt="">
                                 </div>
-                                <div class="3xl:text-[36px] 3xl:leading-[45px] xl:leading-[35px] leading-[30px] xl:text-f24 text-f21">{{ $slide->description }}</div>
+                                <div class="4xl:text-[36px] 3xl:text-f30 3xl:leading-[45px] xl:leading-[35px] leading-[30px] xl:text-f24 text-f21">{{ $slide->description }}</div>
                             </div>
                         </div>
                     @endforeach
@@ -87,11 +85,11 @@
 
     {{-- Block Giá trị cốt lõi --}}
     @if(isset($benvung_data))
-        <div class="3xl:mt-[300px] xl:mt-[150px] mt-[80px]">
+        <div class="xl:mt-[150px] mt-[80px]">
             <div class="container">
                 <div class="lg:grid lg:grid-cols-12 3xl:items-start xl:items-center lg:items-center lg:text-left text-center wow fadeInUp">
                     <div class="col-span-5">
-                        <h3 class="3xl:text-[64px] xl:text-[60px] lg:text-f40 text-f35 md:text-f40 font-bold">{{$title2}}</h3>
+                        <h3 class="4xl:text-[64px] 3xl:text-[55px] xl:text-[60px] lg:text-f40 text-f35 md:text-f40 font-bold">{{$title2}}</h3>
                     </div>
                     <div class="col-span-7 3xl:text-f30 xl:text-f24 text-f20 font-medium 3xl:leading-[40px] leading-[32px] lg:mt-0 mt-[30px] flex items-center text-[#2B2B2B]">
                         {!!$desc2!!}
@@ -100,10 +98,10 @@
                 <div class="lg:grid xl:grid-cols-5 lg:grid-cols-2 gap-[15px] 3xl:mt-[35px] xl:mt-[50px] mt-[40px]">
                     @foreach($benvung_data->title as $k => $title)
                         <div class="col-span-1 relative lg:mb-0 mb-[20px] rounded-[30px] hover-zoom overflow-hidden after:content-[''] after:bg-[linear-gradient(180deg,rgba(0,0,0,0)_49.86%,rgba(0,0,0,0.8)_89.3%)] after:absolute after:left-0 after:top-0 after:w-full after:h-full wow fadeInUp" data-wow-delay="{{($k+1)*0.1}}s">
-                            <img src="{{asset($benvung_data->image[$k])}}" class="3xl:h-[520px] xl:h-[330px] md:h-[400px] h-[250px] w-full object-cover" alt="">
+                            <img src="{{asset($benvung_data->image[$k])}}" class="4xl:h-[520px] 3xl:h-[415px] xl:h-[330px] md:h-[400px] h-[250px] w-full object-cover" alt="">
                             <div class="absolute left-0 bottom-[20px] w-full text-center z-10">
                                 <img src="{{asset($benvung_data->icon[$k])}}" class="w-[60px] h-[60px] object-cover mb-3 inline-block" alt="">
-                                <h3 class="3xl:text-[40px] xl:text-f30 text-f25 mt-[25px] font-medium text-white">{{$title}}</h3>
+                                <h3 class="4xl:text-[40px] 3xl:text-f26 xl:text-f30 text-f25 mt-[25px] font-medium text-white">{{$title}}</h3>
                             </div>
                         </div>
                     @endforeach
@@ -113,9 +111,9 @@
     @endif
     
     {{-- Block 5 --}}
-    <div class="3xl:mt-[300px] xl:mt-[150px] lg:mt-[80px] mt-[50px]">
+    <div class="xl:mt-[115px] lg:mt-[80px] mt-[50px]">
         <div class="container">
-            <h3 class="3xl:text-[64px] xl:text-[40px] lg:text-f30 md:text-f30 text-f24 wow fadeInUp">{{$title3}}</h3>
+            <h3 class="4xl:text-[55px] 3xl:text-[42px] xl:text-[40px] lg:text-f30 md:text-f30 text-f24 wow fadeInUp">{{$title3}}</h3>
             @if(isset($data3))
             <div class="grid md:grid-cols-2 grid-cols-1 gap-[15px] mt-[35px]">
                 @foreach($data3->image as $k => $image)
@@ -123,7 +121,7 @@
                     <img src="{{asset($image)}}" class="w-full h-[560px] object-cover" alt="">
                     <div class="absolute bottom-[35px] px-[30px] w-full z-10">
                         <img src="{{asset($data3->icon[$k])}}" class="w-[85px] h-[85px] object-cover mb-3 inline-block" alt="">
-                        <h3 class="3xl:text-[64px] xl:text-[35px] lg:text-f27 md:text-f27 text-f25 font-semibold mt-[30px] text-white 3xl:leading-[80px] xl:leading-[50px] md:leading-[40px] leading-[35px]">
+                        <h3 class="4xl:text-[55px] 3xl:text-[45px] 3xl:leading-[55px] xl:text-[35px] lg:text-f27 md:text-f27 text-f25 font-semibold mt-[30px] text-white 4xl:leading-[75px] xl:leading-[50px] md:leading-[40px] leading-[35px]">
                             {!! $data3->title[$k] !!}
                         </h3>
                     </div>

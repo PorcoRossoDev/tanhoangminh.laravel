@@ -28,10 +28,10 @@ if( isset(Auth::guard('customer')->user()->id) ){
                                 <span class="bg-[#999999] 4xl:w-[55px] 4xl:h-[55px] xl:w-[35px] xl:h-[35px] round-[5px] flex justify-center items-center">
                                     <svg class="4xl:w-[35px] 4xl:h-[35px] xl:w-[28px] xl:h-[28px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="10" r="3" stroke="#222222" stroke-linecap="round"></circle> <circle cx="12" cy="12" r="9" stroke="#222222"></circle> <path d="M18 18.7059C17.6461 17.6427 16.8662 16.7033 15.7814 16.0332C14.6966 15.3632 13.3674 15 12 15C10.6326 15 9.30341 15.3632 8.21858 16.0332C7.13375 16.7033 6.35391 17.6427 6 18.7059" stroke="#222222" stroke-linecap="round"></path> </g></svg>
                                 </span>
-                                <input type="text" class="4xl:h-[55px] xl:h-[35px] xl:w-[150px] h-[45px] w-[205px] border round-[5px] border-[#e5e5e5] text-[#969696] outline-none px-2" placeholder="User Name">
+                                <input type="text" class="4xl:h-[55px] xl:h-[35px] 4xl:w-[225px] xl:w-[150px] h-[45px] w-[205px] border round-[5px] border-[#e5e5e5] text-[#969696] outline-none px-2" placeholder="User Name">
                             </div>
-                            <div class="inline-block mt-4">
-                                <input type="checkbox"> <label for="">Ghi nhớ tài khoản</label>
+                            <div class="inline-flex items-center mt-4">
+                                <input type="checkbox" class="border-gray-300 rounded checked:bg-color_primary h-4 w-4 mr-2" id="login_remember"> <label for="login_remember">Ghi nhớ tài khoản</label>
                             </div>
                         </div>
                         <div>
@@ -39,12 +39,12 @@ if( isset(Auth::guard('customer')->user()->id) ){
                                 <span class="bg-[#999999] 4xl:w-[55px] 4xl:h-[55px] xl:w-[35px] xl:h-[35px] round-[5px] flex justify-center items-center">
                                     <svg class="4xl:w-[35px] 4xl:h-[35px] xl:w-[28px] xl:h-[28px]" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="icomoon-ignore"> </g> <path d="M16 3.205c-7.067 0-12.795 5.728-12.795 12.795s5.728 12.795 12.795 12.795 12.795-5.728 12.795-12.795c0-7.067-5.728-12.795-12.795-12.795zM16 4.271c6.467 0 11.729 5.261 11.729 11.729 0 2.845-1.019 5.457-2.711 7.49-1.169-0.488-3.93-1.446-5.638-1.951-0.146-0.046-0.169-0.053-0.169-0.66 0-0.501 0.206-1.005 0.407-1.432 0.218-0.464 0.476-1.244 0.569-1.944 0.259-0.301 0.612-0.895 0.839-2.026 0.199-0.997 0.106-1.36-0.026-1.7-0.014-0.036-0.028-0.071-0.039-0.107-0.050-0.234 0.019-1.448 0.189-2.391 0.118-0.647-0.030-2.022-0.921-3.159-0.562-0.719-1.638-1.601-3.603-1.724l-1.078 0.001c-1.932 0.122-3.008 1.004-3.57 1.723-0.89 1.137-1.038 2.513-0.92 3.159 0.172 0.943 0.239 2.157 0.191 2.387-0.010 0.040-0.025 0.075-0.040 0.111-0.131 0.341-0.225 0.703-0.025 1.7 0.226 1.131 0.579 1.725 0.839 2.026 0.092 0.7 0.35 1.48 0.569 1.944 0.159 0.339 0.234 0.801 0.234 1.454 0 0.607-0.023 0.614-0.159 0.657-1.767 0.522-4.579 1.538-5.628 1.997-1.725-2.042-2.768-4.679-2.768-7.555 0-6.467 5.261-11.729 11.729-11.729zM7.811 24.386c1.201-0.49 3.594-1.344 5.167-1.808 0.914-0.288 0.914-1.058 0.914-1.677 0-0.513-0.035-1.269-0.335-1.908-0.206-0.438-0.442-1.189-0.494-1.776-0.011-0.137-0.076-0.265-0.18-0.355-0.151-0.132-0.458-0.616-0.654-1.593-0.155-0.773-0.089-0.942-0.026-1.106 0.027-0.070 0.053-0.139 0.074-0.216 0.128-0.468-0.015-2.005-0.17-2.858-0.068-0.371 0.018-1.424 0.711-2.311 0.622-0.795 1.563-1.238 2.764-1.315l1.011-0.001c1.233 0.078 2.174 0.521 2.797 1.316 0.694 0.887 0.778 1.94 0.71 2.312-0.154 0.852-0.298 2.39-0.17 2.857 0.022 0.078 0.047 0.147 0.074 0.217 0.064 0.163 0.129 0.333-0.025 1.106-0.196 0.977-0.504 1.461-0.655 1.593-0.103 0.091-0.168 0.218-0.18 0.355-0.051 0.588-0.286 1.338-0.492 1.776-0.236 0.502-0.508 1.171-0.508 1.886 0 0.619 0 1.389 0.924 1.68 1.505 0.445 3.91 1.271 5.18 1.77-2.121 2.1-5.035 3.4-8.248 3.4-3.183 0-6.073-1.277-8.188-3.342z" fill="#ffffff"> </path> </g></svg>                                
                                 </span>
-                                <input type="text" class="4xl:h-[55px] xl:h-[35px] xl:w-[150px] h-[45px] w-[205px] border round-[5px] border-[#e5e5e5] text-[#969696] outline-none px-2" placeholder="Mật khẩu">
+                                <input type="text" class="4xl:h-[55px] xl:h-[35px] 4xl:w-[225px] xl:w-[150px] h-[45px] w-[205px] border round-[5px] border-[#e5e5e5] text-[#969696] outline-none px-2" placeholder="Mật khẩu">
                             </div>
                             <a href="" class="text-[#2f51ad] inline-block mt-4">Đổi mật khẩu</a>
                         </div>
                         <div>
-                            <button class="4xl:px-[100px] xl:px-[25px] xl:h-[35px] h-[55px] rounded-[5px] bg-[#999999] text-white flex justify-center items-center text-22 uppercase">Đăng nhập</button>
+                            <button class="4xl:px-[100px] 4xl:h-[55px] xl:px-[25px] xl:h-[35px] h-[55px] rounded-[5px] bg-[#999999] text-white flex justify-center items-center text-22 uppercase">Đăng nhập</button>
                         </div>
                     </div>
                 </form>
@@ -141,6 +141,49 @@ if( isset(Auth::guard('customer')->user()->id) ){
     </div>
     
 </header>
+
+<button command="show-modal" commandfor="dialog" class="rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10">Open dialog</button>
+<el-dialog>
+  <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+    <el-dialog-backdrop class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+
+    <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+      <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          
+
+          <div class="flex">
+            <div class="w-[50px]">
+                <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 text-red-600">
+                    <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="">
+                
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 id="dialog-title" class="text-base font-semibold text-gray-900">Deactivate account</h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>
+                </div>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button type="button" command="close" commandfor="dialog" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">Deactivate</button>
+          <button type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+        </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
+
 
 
 @push('javascript')
