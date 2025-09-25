@@ -370,3 +370,27 @@ span.swiper-pagination-bullet:hover:after {
 .hover-tamnhin:hover>.hover {
     transform: translateY(-100%);
 }
+
+@media (max-width: 1920px) and (min-width: 1500px) {
+    #header-top {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1366px) and (min-width: 1200px) {
+    #header-top {
+        max-width: 1170px;
+        margin: 0 auto;
+    }
+}
+
+.swiper-block-team .description {
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.swiper-block-team .swiper-slide-active .description {
+    opacity: 1;
+    transition: 0.4s;
+}

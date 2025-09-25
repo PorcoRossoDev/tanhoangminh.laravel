@@ -39,6 +39,7 @@ class HomeController extends Controller
     }
     public function index()
     {
+        $teamSlide = getSlider('home-team');
         $fcSystem = $this->system->fcSystem();
 
         $id_vh = !empty($fcSystem['homepage_vanhoa']) ? json_decode($fcSystem['homepage_vanhoa'], true) : 0;
@@ -75,34 +76,29 @@ class HomeController extends Controller
                 ->get()
                 ->map(function($child) {
                     $child->listMedia = $child->listMedia()
-                        ->limit(3)
+                        ->limit(12)
                         ->get();
                     return $child;
                 });
         }
 
-        $homeBDS = \App\Models\CategoryArticle::select('id', 'title', 'slug')
-            ->where([
-                'alanguage' => config('app.locale'),
-                'publish'   => 0,
-                'parentid'  => 0,
-                'isfooter'  => 1,
-            ])
+        $id_bds = !empty($fcSystem['homepage_vanhoa']) ? json_decode($fcSystem['homepage_vanhoa'], true) : 0;
+        $homeBDS = null;
+        if( $id_bds ){
+            $homeBDS = \App\Models\CategoryArticle::select('id', 'title', 'slug', 'image', 'description')
+            ->where(['alanguage' => config('app.locale'), 'publish' => 0])
+            ->whereIn('id', $id_bds)
             ->orderBy('order', 'asc')
-            ->first();
-
-        if ($homeBDS) {
-            $homeBDS->children = $homeBDS->children()
-                ->get()
-                ->map(function($child) {
-                    // Lấy postsDBS kèm limit 4 bài (ví dụ)
-                    $child->postsDBS = $child->postsDBS()
-                        ->orderBy('order', 'asc')
-                        ->orderBy('id', 'desc')
-                        ->limit(6)
-                        ->get();
-                    return $child;
-                });
+            ->orderBy('id', 'desc')
+            ->get()
+            ->map(function($cat){
+                $cat->posts = $cat->posts()
+                    ->orderBy('order', 'asc')
+                    ->orderBy('id', 'desc')
+                    ->limit(6)
+                    ->get();
+                return $cat;
+            });
         }
 
 
@@ -130,7 +126,7 @@ class HomeController extends Controller
         $seo['meta_title'] = !empty($page['meta_title']) ? $page['meta_title'] : $page['title'];
         $seo['meta_description'] = !empty($page['meta_description']) ? $page['meta_description'] : '';
         $seo['meta_image'] = !empty($page['image']) ? url($page['image']) : '';
-        return view('homepage.home.index', compact('page', 'seo', 'fcSystem', 'isVanHoa', 'homeMedia', 'homeBDS'));
+        return view('homepage.home.index', compact('page', 'seo', 'fcSystem', 'isVanHoa', 'homeMedia', 'homeBDS', 'teamSlide'));
     }
 
     public function api()
