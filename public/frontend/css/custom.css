@@ -56,6 +56,7 @@
 body {
     font-family: 'SVN-Poppins', sans-serif;
     background-color: #FFFBF2;
+    font-size: 18px;
 }
 
 .font-misslegate {
@@ -273,8 +274,8 @@ span.swiper-pagination-bullet:hover:after {
 }
 
 .content-content h2 {
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 25px;
+    line-height: 36px;
 }
 
 @media (min-width: 1366px) and (max-width: 1560px) {
@@ -378,6 +379,30 @@ span.swiper-pagination-bullet:hover:after {
     }
 }
 
+@media (max-width: 768px) {
+    #header-top {
+        padding-inline: 15px;
+    }
+    #listMenuBar>li:first-child {
+        display: none;
+    }
+    #listMenuBar>li:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 13px;
+        margin-bottom: 13px;
+    }
+    #listMenuBar {
+        padding-bottom: 15px;
+        margin-top: 4px;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    #header-top {
+        padding-inline: 20px;
+    }
+}
+
 @media (max-width: 1366px) and (min-width: 1200px) {
     #header-top {
         max-width: 1170px;
@@ -386,7 +411,7 @@ span.swiper-pagination-bullet:hover:after {
 }
 
 @media (max-width: 2880px) and (min-width: 2000px) {
-    .page-responsibility > div{
+    .page-responsibility>div {
         max-width: 1920px;
         margin: 0 auto;
     }

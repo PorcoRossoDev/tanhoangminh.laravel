@@ -287,6 +287,8 @@ class PageController extends Controller
 
         $thmer = getSlider('thmer');
         $comment = getSlider('comment');
+        $file1 = getSlider('file-new');
+        $file2 = getSlider('file-view');
 
         $fields = [];
         if (!empty($page->fields)) {
@@ -372,7 +374,7 @@ class PageController extends Controller
         $seo['meta_description'] = !empty($page['meta_description']) ? $page['meta_description'] : '';
         $seo['meta_image'] = !empty($page['image']) ? url($page['image']) : '';
         
-        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_leauge', 'th_sport', 'thmer', 'comment'));
+        return view('page.frontend.thm_360', compact('seo', 'page', 'fcSystem', 'fields', 'noibat', 'th_zoom', 'th_leauge', 'th_sport', 'thmer', 'comment', 'file1', 'file2'));
     }
     
     public function scheduleSampling(Request $request)

@@ -2,22 +2,25 @@
 @section('content')
 
     <div class="main-page">
-        
+        @section('banner')
+            @if( !empty(showField($detail->fields, 'config_colums_input_article_banner')) )
+                @include('homepage.common.banner', ['banner' => asset(showField($detail->fields, 'config_colums_input_article_banner'))])
+            @endif
+        @endsection
         <div class="relative">
             <div class="container">
-                <img src="upload/images/logo/dbs-1.jpg" class="w-full h-full" alt="">
                 <div class="mt-[40px]">
                     <ul>
-                        <li class="inline-block px-[14px] py-[3px bg-color_primary text-white border border-color_primary rounded-[114px] text-f18 leading-[130%]"><a href="{{ route('routerURL', ['slug' => $catalogues->slug]) }}">{{ $catalogues->title }}</a></li>
-                        <li class="inline-block px-[14px] py-[3px ml-[20px] rounded-[114px] border border-black text-f18 leading-[130%]">{{ $detail->created_at->format('M d, Y') }}</li>
+                        <li class="4xl:text-[21px] inline-block px-[14px] py-[3px bg-color_primary text-white border border-color_primary rounded-[114px] text-f18 leading-[130%]"><a href="{{ route('routerURL', ['slug' => $catalogues->slug]) }}">{{ $catalogues->title }}</a></li>
+                        <li class="4xl:text-[21px] inline-block px-[14px] py-[3px ml-[20px] rounded-[114px] border border-black text-f18 leading-[130%]">{{ $detail->created_at->format('M d, Y') }}</li>
                     </ul>
                 </div>
-                <h1 class="mt-[50px] font-semibold 3xl:text-[50px] 2xl:text-[40px] lg:text-f35 md:text-f28 text-f26">{{ $detail->title }}</h1>
+                <h1 class="mt-[20px] font-semibold 4xl:text-f40 text-f26">{{ $detail->title }}</h1>
 
                 <div class="xl:flex gap-[35px]">
-                    <div class="3xl:w-[1200px] xl:w-[65%] w-full">
-                        <div class="3xl:mt-[75px] 2xl:mt-[40px] mt-5">
-                            <ul class="flex items-center">
+                    <div class="4xl:w-[1200px] 3xl:w-[1100px] xl:w-[65%] w-full">
+                        <div class="mt-5">
+                            <ul class="flex items-center 4xl:text-f22">
                                 <li class="inline-flex items-center">
                                     <img src="upload/images/logo/author.jpg" class="w-[50px] h-[50px] rounded-full" alt="">
                                     <span class="inline-block ml-[18px]">{{ $detail->user->name }}</span>
@@ -48,20 +51,20 @@
                             </ul>
                         </div>
 
-                        <div class="mt-[40px] content-content lg:text-f23 md:text-f21 text-f20 leading-[30px]">
+                        <div class="mt-[40px] 4xl:text-[25px] content-content">
                             {!! $detail->content !!}
                         </div>
 
                         <div class="comment mt-[90px]">
-                            <h3 class="font-semibold 3xl:text-f30 2xl:text-f27 text-f25">Comments</h3>
+                            <h3 class="font-semibold 4xl:text-f35 text-f24">Comments</h3>
                             <div class="px-[24px] py-[33px] rounded-[30px] mt-5" style="box-shadow: 6px 8px 23.4px 0px rgba(0, 0, 0, 0.11);">
                                 <div class="mt-[20px]" id="comment-list">
                                 </div>
                                 <div class="flex gap-[10px]">
                                     <img src="upload/images/logo/author-post.jpg" class="w-[60px] h-[60px] object-cover rounded-full border-2 border-color_primary" alt="">
                                     <form action="{{ route('commentFrontend.postArticle') }}" class="relative flex-1 lg:text-left text-right" id="postArticle">
-                                        <textarea type="text" id="postArea" placeholder="Viết bình luận" class="outline-none min-h-[75px] px-[15px] py-[15px] text-f16 round-[30px] text-[#565973] bg-[#EBEBEB] w-full rounded-[30px]"></textarea>
-                                        <button type="submit" class="border-0 bg-color_primary text-f16 px-[30px] py-[10px] text-white lg:absolute lg:top-1/2 lg:translate-y-[-50%] right-[15px] lg:mt-0 mt-4 rounded-[30px]">Gửi bình luận</button>
+                                        <textarea type="text" id="postArea" placeholder="Viết bình luận" class="4xl:text-f24 outline-none min-h-[75px] px-[15px] py-[15px] text-f16 round-[30px] text-[#565973] bg-[#EBEBEB] w-full rounded-[30px]"></textarea>
+                                        <button type="submit" class="4xl:text-f24 border-0 bg-color_primary text-f16 px-[30px] py-[10px] text-white lg:absolute lg:top-1/2 lg:translate-y-[-50%] right-[15px] lg:mt-0 mt-4 rounded-[30px]">Gửi bình luận</button>
                                     </form>
                                 </div>
                             </div>
@@ -69,23 +72,28 @@
                     </div>
 
                     <div class="flex-1 mt-[85px] lg:sticky top-[15px] h-full">
-                        <div class="3xl:text-f30 2xl:text-f27 text-f25 font-extrabold leading-[30px] uppercase">Tin nổi bật</div>
+                        <div class="4xl:text-f35 text-f26 font-bold leading-[30px] uppercase">Tin nổi bật</div>
                         <div class="3lx:mt-[50px] mt-[30px] h-[620px] overflow-y-scroll overflow-hidden scroll-bds">
                             @if($sameArticle && $sameArticle->isNotEmpty())
                                 @foreach ($sameArticle as $post)
                                     <div class="flex gap-[25px] mb-[33px]">
-                                        <div class="3xl:w-[230px] xl:w-[40%] md:w-[23%] w-[40%]">
+                                        <div class="4xl:w-[230px] 3xl:w-[200px] xl:w-[40%] md:w-[23%] w-[40%]">
                                             <a href="{{ route('routerURL', ['slug' => $post->slug]) }}">
                                                 <img src="{{ asset($post->image) }}" class="w-full 3xl:h-[200px] h-[160px] object-cover rounded-[20px]" alt="">
                                             </a>
                                         </div>
                                         <div class="flex-1">
-                                            <div>
+                                            <div class="4xl:text-f21">
                                                 <span class="text-color_primary">{{ $post->created_at->format('M d, Y') }}</span>
                                                 <span class="ml-2">{{ $post->catalogues->title }}</span>
                                             </div>
-                                            <h4 class="3xl:text-f22 text-f20 3xl:font-bold font-semibold mt-[22px]">
-                                                <a href="{{ route('routerURL', ['slug' => $post->slug]) }}">
+                                            <h4 class="4xl:text-f28 3xl:text-f22 leading-normal text-f20 font-semibold mt-[22px]">
+                                                <a href="{{ route('routerURL', ['slug' => $post->slug]) }}" style="
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    -webkit-box-orient: vertical;
+                                                    -webkit-line-clamp: 3;
+                                                    display: -webkit-box;">
                                                     {{ $post->title }}
                                                 </a>
                                             </h4>

@@ -6,6 +6,9 @@
         $ykien = explode(PHP_EOL, showField($page->fields, 'config_colums_textarea_contact_ykien'));
         $phongban = explode(PHP_EOL, showField($page->fields, 'config_colums_textarea_contact_phongban'));
     @endphp
+    @section('banner')
+        @include('homepage.common.banner', ['banner' => asset($page->image)])
+    @endsection
     <div class="relative after:content[''] py-[60px] after:bg-[rgba(195,142,43,0.9)] after:absolute after:top-0 after:left-0 after:w-full after:h-full" style="background: url('upload/images/logo/bg-contact.png')">
         <div class="container">
             <div class="">

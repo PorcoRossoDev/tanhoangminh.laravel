@@ -2,10 +2,13 @@
 @section('content')
 
 <div class="main-page">
+    @section('banner')
+        @include('homepage.common.banner', ['banner' => asset($detail->image)])
+    @endsection
     <div class="container">
         <div class="grid grid-cols-12 xl:gap-[50px] lg:mt-[80px] mt-[50px]">
             <div class="xl:col-span-8 col-span-12">
-                <h3 class="font-bold xl:text-[40px] lg:text-f34 text-f31 uppercase mb-8 wow fadeInUp">{{ $detail->title }}</h3>
+                <h3 class="font-bold xl:text-[30px] lg:text-f28 text-f26 uppercase mb-8 wow fadeInUp">{{ $detail->title }}</h3>
                 @if( $data && $data->isNotEmpty() )
                     @foreach ($data as $k => $post)
                         <div class="lg:flex mb-[30px] border-b border-[#ddd] pb-[30px] wow fadeInUp">
@@ -15,7 +18,7 @@
                                 </a>
                             </div>
                             <div class="flex-1 lg:pl-[30px] lg:mt-0 mt-4">
-                                <h3 class="xl:text-f28 lg:text-f25 text-f23 font-bold mb-4"><a href="{{ route('routerURL', ['slug' => $post->slug]) }}">{{ $post->title }}</a></h3>
+                                <h3 class="xl:text-f23 leading-normal text-f21 font-semibold mb-4"><a href="{{ route('routerURL', ['slug' => $post->slug]) }}">{{ $post->title }}</a></h3>
                                 <ul class="flex items-center">
                                     <li class="inline-flex items-center">
                                         <span>
@@ -59,7 +62,7 @@
             <div class="xl:col-span-4 col-span-12">
                 @if($noibat && $noibat->isNotEmpty())
                     @foreach($noibat as $cat)
-                        <h3 class="font-extrabold xl:text-[30px] lg:text-f34 text-f31 uppercase wow fadeInUp">{{ $cat->title }}</h3>
+                        <h3 class="font-semibold xl:text-[24px] lg:text-f28 text-f26 uppercase mb-8 wow fadeInUp">{{ $cat->title }}</h3>
                         <div class="xl:mt-[50px] mt-[30px]">
                             @foreach ($cat->posts as $post)
                             <div class="md:flex gap-[25px] mb-[33px] wow fadeInUp">
@@ -73,8 +76,14 @@
                                         <span class="text-color_primary">{{ $post->created_at->format('M d, Y') }}</span>
                                         <span class="ml-2"><a href="{{route('routerURL', ['slug' => $cat->slug])}}">{{$cat->title}}</a></span>
                                     </div>
-                                    <h4 class="3xl:text-f22 text-f20 font-bold mt-[22px]">
-                                        <a href="{{route('routerURL', ['slug' => $post->slug])}}">
+                                    <h4 class="3xl:text-f22 text-f20 font-semibold leading-normal mt-[22px]">
+                                        <a href="{{route('routerURL', ['slug' => $post->slug])}}" style="
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            -webkit-line-clamp: 3;
+                                            -webkit-box-orient: vertical;
+                                            display: -webkit-box;
+                                        ">
                                             {{$post->title}}
                                         </a>
                                     </h4>

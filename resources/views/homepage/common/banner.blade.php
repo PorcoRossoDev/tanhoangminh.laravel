@@ -1,0 +1,1 @@
+<img src="{{ $banner }}" class="4xl:h-[690px] 3xl:h-[500px] xl:h-[450px] lg:h-[400px] h-[300px] w-full object-cover" alt="">

@@ -3,6 +3,10 @@
 
 <div class="main-page">
 
+    @section('banner')
+        @include('homepage.common.banner', ['banner' => asset($page->image)])
+    @endsection
+
     {{-- Block Tập đoàn --}}
     @php
         $block1 = getDataJson($page->fields, 'config_colums_json_about_info');
@@ -47,19 +51,19 @@
     <div class="bg-[#F7E8D0] mt-[100px] wow fadeInUp">
         <div class="container">
             <div class="py-[30px]">
-                <ul class="flex justify-between font-normal 4xl:text-f26 3xl:text-f19 xl:text-f17 whitespace-nowrap gap-[15px] overflow-y-auto md:text-f20 text-f17">
-                    <li><a href="javascript:void(0)" class="px-[20px] py-[20px] bg-color_primary text-white border-color_primary rounded-[165px] inline-flex">{{ (isset($tamnhin)) ? $tamnhin->title : 'TẦM NHÌN & SỨ MỆNH' }}</a></li>
-                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title2}}</a></li>
-                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title3}}</a></li>
-                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ LÃNH ĐẠO</a></li>
-                    <li><a href="javascript:void(0)" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ CÁN BỘ QUẢN LÝ</a></li>
+                <ul class="flex justify-between font-normal 4xl:text-f26 3xl:text-f19 xl:text-f17 whitespace-nowrap gap-[15px] overflow-y-auto md:text-f20 text-f17 scrollTarget">
+                    <li><a href="javascript:void(0)" data-id="tamnhin" class="px-[20px] py-[20px] bg-color_primary text-white border-color_primary rounded-[165px] inline-flex">{{ (isset($tamnhin)) ? $tamnhin->title : 'TẦM NHÌN & SỨ MỆNH' }}</a></li>
+                    <li><a href="javascript:void(0)" data-id="giatri" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title2}}</a></li>
+                    <li><a href="javascript:void(0)" data-id="vanhoa" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">{{$title3}}</a></li>
+                    <li><a href="javascript:void(0)" data-id="lanhdao" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ LÃNH ĐẠO</a></li>
+                    <li><a href="javascript:void(0)" data-id="canbo" class="4xl:px-[20px] 4xl:py-[20px] 3xl:py-[15px] px-[15px] py-[15px] border border-black rounded-[165px] inline-flex">ĐỘI NGŨ CÁN BỘ QUẢN LÝ</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
     {{-- Block Tầm nhìn sứ mệnh --}}
-    <div class="mt-[60px]">
+    <div class="mt-[60px]" id="giatri">
         <div class="container">
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-[15px]">
                 @if(isset($tamnhin))
@@ -85,7 +89,7 @@
 
     {{-- Block Giá trị cốt lõi --}}
     @if(isset($benvung_data))
-        <div class="xl:mt-[150px] mt-[80px]">
+        <div class="xl:mt-[150px] mt-[80px]" id="vanhoa">
             <div class="container">
                 <div class="lg:grid lg:grid-cols-12 3xl:items-start xl:items-center lg:items-center lg:text-left text-center wow fadeInUp">
                     <div class="col-span-5">
@@ -111,7 +115,7 @@
     @endif
     
     {{-- Block 5 --}}
-    <div class="xl:mt-[115px] lg:mt-[80px] mt-[50px]">
+    <div class="xl:mt-[115px] lg:mt-[80px] mt-[50px]" id="lanhdao">
         <div class="container">
             <h3 class="4xl:text-[55px] 3xl:text-[42px] xl:text-[40px] lg:text-f30 md:text-f30 text-f24 wow fadeInUp">{{$title3}}</h3>
             @if(isset($data3))
@@ -242,7 +246,7 @@
         $blockD1 = getSlider('doi-ngu-1');
         $blockD2 = getSlider('doi-ngu-2');
     @endphp
-    <div class="mt-[115px]">
+    <div class="mt-[115px]" id="canbo">
         <div class="container">
             <div class="text-center mb-[30px] wow fadeInUp">
                 <div class="font-misslegate text-[70px]">Đội ngũ</div>
@@ -439,6 +443,14 @@
             },
         }
     });
+  </script>
+  <script>
+    $('.scrollTarget a').click(function() {
+        var dataTarget = $(this).attr('data-id')
+        $('html, body').animate({
+            scrollTop: $('#'+dataTarget).offset().top
+        }, 600); // 600ms để scroll mượt
+    })
   </script>
 @endpush
 
