@@ -62,6 +62,48 @@ class CustomerController extends Controller
             return redirect()->route('customer.login')->withInput()->withErrors('邮箱或密码不正确!');
         }
     }
+
+
+    public function loginAjax(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Email không được để trống.',
+            'email.email' => 'Email không đúng định dạng.',
+            'password.required' => 'Mật khẩu không được để trống.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->all() ? implode(' ', $validator->errors()->all()) : '',
+            ]);
+        }
+
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'active' => 1,
+        ];
+
+        $remember = $request->filled('remember');
+
+        if (Auth::guard('customer')->attempt($credentials, $remember)) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Đăng nhập thành công!',
+                'redirect' => route('customer.dashboard'),
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Tài khoản không chính xác!',
+        ]);
+    }
+
     //đăng ký
     public function register()
     {

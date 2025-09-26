@@ -91,10 +91,12 @@ Route::group(['middleware' => 'locale'], function () {
     //login customer
     Route::group(['middleware' => ['guest:customer']], function () {
         Route::group(['prefix' => 'thanh-vien'], function () {
+            Route::post('/login-ajax', [CustomerController::class, 'loginAjax'])->name('customer.login-ajax');
             Route::get('/login', [CustomerController::class, 'login'])->name('customer.login');
             Route::post('/login', [CustomerController::class, 'store'])->name('customer.login-store');
             Route::get('/register', [CustomerController::class, 'register'])->name('customer.register');
             Route::post('/register', [CustomerController::class, 'register_store'])->name('customer.register-store');
+            
             //login social
             Route::get('/login/redirect/{provider}', [CustomerController::class, 'redirect'])->name('customer.redirect');
             Route::get('/login/callback/{provider}', [CustomerController::class, 'callback'])->name('customer.callback');
